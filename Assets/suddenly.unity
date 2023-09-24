@@ -248,7 +248,7 @@ Rigidbody2D:
   m_Mass: 1
   m_LinearDrag: 2
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 2
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -318,6 +318,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxSpeed: 4
+  jumpPower: 10
 --- !u!1 &299895799
 GameObject:
   m_ObjectHideFlags: 0
@@ -329,7 +330,7 @@ GameObject:
   - component: {fileID: 299895800}
   - component: {fileID: 299895802}
   - component: {fileID: 299895801}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Single (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +460,7 @@ GameObject:
   - component: {fileID: 437823685}
   - component: {fileID: 437823687}
   - component: {fileID: 437823686}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Single (8)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -681,7 +682,7 @@ GameObject:
   - component: {fileID: 582482650}
   - component: {fileID: 582482652}
   - component: {fileID: 582482651}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Single (4)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -811,7 +812,7 @@ GameObject:
   - component: {fileID: 619416965}
   - component: {fileID: 619416967}
   - component: {fileID: 619416966}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Single (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1071,7 +1072,7 @@ GameObject:
   - component: {fileID: 1571619430}
   - component: {fileID: 1571619432}
   - component: {fileID: 1571619431}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Single (6)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1201,7 +1202,7 @@ GameObject:
   - component: {fileID: 1745362322}
   - component: {fileID: 1745362324}
   - component: {fileID: 1745362323}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Single (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1331,7 +1332,7 @@ GameObject:
   - component: {fileID: 1764444666}
   - component: {fileID: 1764444668}
   - component: {fileID: 1764444667}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Single (7)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1461,7 +1462,7 @@ GameObject:
   - component: {fileID: 2100699956}
   - component: {fileID: 2100699958}
   - component: {fileID: 2100699957}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Single (5)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1591,7 +1592,7 @@ GameObject:
   - component: {fileID: 2114915583}
   - component: {fileID: 2114915582}
   - component: {fileID: 2114915584}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Single
   m_TagString: Untagged
   m_Icon: {fileID: 0}

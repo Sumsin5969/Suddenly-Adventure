@@ -5,6 +5,7 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
     public float maxSpeed;
+    public float jumpPower;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
@@ -16,8 +17,15 @@ public class PlayerMove : MonoBehaviour
         anim = GetComponent<Animator>();
     }
 
-    private void Update()
+    void Update()
     {
+        // 점프
+        if (Input.GetButtonDown("Jump") && !anim.GetBool("isJumping")) // 점프 상태가 아닐 시 점프 가능 (1단 점프만)
+        {
+            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            anim.SetBool("isJumping", true);
+        }
+
         // 마찰력
         if(Input.GetButtonUp("Horizontal")) 
         {
@@ -29,6 +37,7 @@ public class PlayerMove : MonoBehaviour
         {
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
         }
+
         // 무빙 애니메이션
         if(Mathf.Abs(rigid.velocity.x) < 0.2)
         {
@@ -51,5 +60,19 @@ public class PlayerMove : MonoBehaviour
             rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
         else if (rigid.velocity.x < maxSpeed * (-1)) // 왼쪽 최고 속도
             rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
+
+
+        if(rigid.velocity.y < 0) // 내려갈 때만 레이캐스트를 쏨
+        {
+            // 레이캐스트 그리기
+            Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
+            // 레이캐스트 히트, 레이어마스크 인식
+            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
+            // 착지
+            if(rayHit.collider != null)
+                if(rayHit.distance < 1.0f)
+                    anim.SetBool("isJumping", false);
+                    //Debug.Log(rayHit.collider.name);
+        }
     }
 }
