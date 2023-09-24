@@ -19,8 +19,8 @@ public class PlayerMove : MonoBehaviour
 
     void Update()
     {
-        // 점프
-        if (Input.GetButtonDown("Jump") && !anim.GetBool("isJumping")) // 점프 상태가 아닐 시 점프 가능 (1단 점프만)
+        // 점프 상태가 아닐 시 점프 가능 (무한점프 방지)
+        if (Input.GetButtonDown("Jump") && !anim.GetBool("isJumping")) 
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             anim.SetBool("isJumping", true);
@@ -38,7 +38,7 @@ public class PlayerMove : MonoBehaviour
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
         }
 
-        // 무빙 애니메이션
+        // 무브 애니메이션
         if(Mathf.Abs(rigid.velocity.x) < 0.2)
         {
             anim.SetBool("isWalking", false);
