@@ -20,7 +20,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         // 점프 상태가 아닐 시 점프 가능 (무한점프 방지)
-        if (Input.GetButtonDown("Jump") && !anim.GetBool("isJumping")) 
+        if (Input.GetKeyDown(KeyCode.UpArrow) && !anim.GetBool("isJumping")) 
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             anim.SetBool("isJumping", true);
