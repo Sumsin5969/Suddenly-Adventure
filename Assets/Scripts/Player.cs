@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    Rigidbody2D rigid; 
-
+    public float maxSpeed;
+    Rigidbody2D rigid;
+    
     // Start is called before the first frame update
     void Awake()
     {
@@ -15,7 +16,13 @@ public class PlayerMove : MonoBehaviour
     // Update is called once per frame
     void FixedUpdate()
     {
-        float h = Input.GetAxis("Horizontal");
+        float h = Input.GetAxis("Horizontal"); // 키보드 입력값
+
         rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
+        
+        if (rigid.velocity.x > maxSpeed) // 오른쪽 최고 속도
+            rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
+        else if (rigid.velocity.x < maxSpeed * (-1)) // 왼쪽 최고 속도
+            rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
     }
 }
