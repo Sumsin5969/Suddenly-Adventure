@@ -29,7 +29,7 @@ public class PlayerMove : MonoBehaviour
         // 마찰력
         if(Input.GetButtonUp("Horizontal")) 
         {
-            rigid.velocity = new Vector2 (rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
+            rigid.velocity = new Vector2 (rigid.velocity.normalized.x * 0.1f, rigid.velocity.y);
         }
 
         // 방향 전환
