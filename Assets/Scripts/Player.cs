@@ -33,13 +33,13 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 방향 전환
-        if(Input.GetButtonDown("Horizontal"))
+        if(Input.GetButton("Horizontal"))
         {
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
         }
 
         // 무브 애니메이션
-        if(Mathf.Abs(rigid.velocity.x) < 0.2)
+        if(Mathf.Abs(rigid.velocity.x) < 0.5)
         {
             anim.SetBool("isWalking", false);
         }
