@@ -26,20 +26,19 @@ public class PlayerMove : MonoBehaviour
             anim.SetBool("isJumping", true);
         }
 
-        // 마찰력
-        if(Input.GetButtonUp("Horizontal")) 
-        {
-            rigid.velocity = new Vector2 (rigid.velocity.normalized.x * 0.5f, rigid.velocity.y);
-        }
-           
         // 방향 전환
-        if(Input.GetButton("Horizontal"))
+        if (Input.GetButton("Horizontal"))
         {
             spriteRenderer.flipX = Input.GetAxisRaw("Horizontal") == -1;
         }
 
+        float h = Input.GetAxis("Horizontal"); // 키보드 입력값
+
+        // 항상 최대 속도로 설정
+        rigid.velocity = new Vector2(h * maxSpeed, rigid.velocity.y);
+
         // 무브 애니메이션
-        if(Mathf.Abs(rigid.velocity.x) < 0.5)
+        if (Mathf.Abs(rigid.velocity.x) < 0.5)
         {
             anim.SetBool("isWalking", false);
         }
@@ -47,16 +46,6 @@ public class PlayerMove : MonoBehaviour
         {
             anim.SetBool("isWalking", true);
         }
-        float h = Input.GetAxis("Horizontal"); // 키보드 입력값
-
-        // 이동 메서드
-        rigid.AddForce(Vector2.right * h, ForceMode2D.Impulse);
-
-        if (rigid.velocity.x > maxSpeed) // 오른쪽 최고 속도
-            rigid.velocity = new Vector2(maxSpeed, rigid.velocity.y);
-        else if (rigid.velocity.x < maxSpeed * (-1)) // 왼쪽 최고 속도
-            rigid.velocity = new Vector2(maxSpeed * (-1), rigid.velocity.y);
-
     }
 
     void FixedUpdate()
