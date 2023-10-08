@@ -21,10 +21,10 @@ public class EnemyMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        //Move
+        // Move
         rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
 
-        //Platform Check
+        // Platform Check
         Vector2 frontVec = new Vector2(rigid.position.x + nextMove * 0.3f, rigid.position.y);
         Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
         RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
@@ -32,24 +32,24 @@ public class EnemyMove : MonoBehaviour
             Turn();
     }
 
-    //營敝 л熱
+    // 營敝 л熱
     void Think()
     {
-        //Set Next Active
+        // Set Next Active
         nextMove = Random.Range(-1, 2);
 
-        //Sprite Animation
+        // Sprite Animation
         anim.SetInteger("WalkSpeed", nextMove);
 
-        //Flip Sprite
+        // Flip Sprite
         if (nextMove != 0)
             spriteRenderer.flipX = nextMove == 1;
 
-        //Recursive
+        // Recursive(營敝)
         float nextThinkTime = Random.Range(1f, 2f);
         Invoke("Think", nextThinkTime);
     }
-
+    
     void Turn()
     {
         nextMove *= -1;
