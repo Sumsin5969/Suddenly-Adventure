@@ -9,6 +9,7 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    bool isMoving = false;
 
     void Awake()
     {
@@ -20,7 +21,7 @@ public class PlayerMove : MonoBehaviour
     void Update()
     {
         // 점프 상태가 아닐 시 점프 가능 (무한점프 방지)
-        if (Input.GetKeyDown(KeyCode.UpArrow) && !anim.GetBool("isJumping")) 
+        if (Input.GetKeyDown(KeyCode.UpArrow) && !anim.GetBool("isJumping"))
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             anim.SetBool("isJumping", true);
@@ -34,18 +35,24 @@ public class PlayerMove : MonoBehaviour
 
         float h = Input.GetAxis("Horizontal"); // 키보드 입력값
 
-        // 항상 최대 속도로 설정
-        rigid.velocity = new Vector2(h * maxSpeed, rigid.velocity.y);
-
-        // 무브 애니메이션
-        if (Mathf.Abs(rigid.velocity.x) < 0.5)
+        // 키 입력이 있는 경우에만 가속을 주도록 수정
+        if (Mathf.Abs(h) > 0.1f)
         {
-            anim.SetBool("isWalking", false);
+            isMoving = true;
         }
         else
         {
-            anim.SetBool("isWalking", true);
+            isMoving = false;
         }
+
+        // 항상 최대 속도로 설정
+        if (isMoving)
+        {
+            rigid.velocity = new Vector2(h * maxSpeed, rigid.velocity.y);
+        }
+
+        // 무브 애니메이션
+        anim.SetBool("isWalking", isMoving);
     }
 
     void FixedUpdate()
