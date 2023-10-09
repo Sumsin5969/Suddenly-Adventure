@@ -73,4 +73,34 @@ public class PlayerMove : MonoBehaviour
                     //Debug.Log(rayHit.collider.name);
         }
     }
+
+    private void OnCollisionEnter2D(Collision2D collision) // 피격
+    {
+        // 플레이어가 몬스터랑 접촉시
+        if (collision.gameObject.tag == "Enemy")
+        {
+            OnDamaged(collision.transform.position);
+        }
+    }
+    private void OnDamaged(Vector2 targetPos) // 피격시 설정
+    {
+        // Play의 레이어를 PlayDameged로 변경
+        gameObject.layer = 11;
+
+        // 피격시 색상 및 투명도 설정
+        spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+
+        // 피격시 밀려남
+        int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
+        rigid.AddForce(new Vector2(dirc, 1) * 20, ForceMode2D.Impulse);
+
+        // 애니메이션
+        anim.SetTrigger("doDamaged");
+        Invoke("OffDamaged", 1); // Player 레이어로 돌아가는 시간(무적시간설정)
+    }
+    private void OffDamaged() // 레이어를 Player로 변경
+    {
+        gameObject.layer = 10;
+        spriteRenderer.color = new Color(1, 1, 1, 1);
+    }
 }
