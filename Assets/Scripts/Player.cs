@@ -84,7 +84,7 @@ public class PlayerMove : MonoBehaviour
     }
     private void OnDamaged(Vector2 targetPos) // 피격시 설정
     {
-        // Play의 레이어를 PlayDameged로 변경
+        // 레이어를 PlayDameged로 변경
         gameObject.layer = 11;
 
         // 피격시 색상 및 투명도 설정
