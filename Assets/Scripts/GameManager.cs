@@ -9,9 +9,24 @@ public class GameManager : MonoBehaviour
     public int stageIndex;
     public int health;
     public PlayerMove player;
+    public GameObject[] Stages;
     public void NextStage()
     {
-        stageIndex++;
+        // 스테이지 바꾸기
+        if (stageIndex < Stages.Length-1)
+        {
+            Stages[stageIndex].SetActive(false);
+            stageIndex++;
+            Stages[stageIndex].SetActive(true);
+            PlayerReposition();
+        }
+        else { // 게임 클리어시
+            // 플레이어 컨트롤 잠금
+            Time.timeScale = 0;
+            //결과 UI
+            Debug.Log("게임 클리어!");
+        }
+        // Calculate Point
         totalPoint += stagePoint;
         stagePoint = 0;
     }
@@ -34,15 +49,18 @@ public class GameManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            // 떨어지면 체력감소
-            HealthDown();
-
             // 플레이어를 땅 위로 이동
             if (health > 1)
-            {
-                collision.attachedRigidbody.velocity = Vector2.zero;
-                collision.transform.position = new Vector3(-6, 4, -1); // 어디로 이동시킬지
-            }
+                PlayerReposition();
+
+            // 떨어지면 체력감소
+            HealthDown();
         }
+    }
+
+    void PlayerReposition()
+    {
+        player.transform.position = new Vector3(-6, 4, -1);
+        player.VelocityZero();
     }
 }
