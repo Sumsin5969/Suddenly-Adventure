@@ -10,11 +10,13 @@ public class PlayerMove : MonoBehaviour
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
+    CapsuleCollider2D capsuleCollider;
     bool isMoving = false;
     private float curTime;
     public float coolTime = 0.5f;
     public Transform pos;
     public Vector3 boxSize;
+    public GameManager gameManager;
 
 
     void Awake()
@@ -22,11 +24,12 @@ public class PlayerMove : MonoBehaviour
         rigid = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
+        capsuleCollider = GetComponent<CapsuleCollider2D>();
     }
 
     void Update()
     {
-        // ?í”„ ?íƒœê°€ ?„ë‹ ???í”„ ê°€??(ë¬´í•œ?í”„ ë°©ì?)
+        // ¹«ÇÑÁ¡ÇÁ ¹æÁö
         if (Input.GetKeyDown(KeyCode.UpArrow) && !anim.GetBool("isJumping"))
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
@@ -46,11 +49,11 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        float h = Input.GetAxis("Horizontal"); // ?¤ë³´???…ë ¥ê°?
+        float h = Input.GetAxis("Horizontal"); // Å°º¸µå ÀÔ·Â°ª
 
         
             
-        // ???…ë ¥???ˆëŠ” ê²½ìš°?ë§Œ ê°€?ì„ ì£¼ë„ë¡??˜ì •
+        // Å° ÀÔ·ÂÀÌ ÀÖ´Â °æ¿ì¿¡¸¸ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ³ª¿È
         if (Mathf.Abs(h) > 0.1f)
         {
             isMoving = true;
@@ -60,13 +63,13 @@ public class PlayerMove : MonoBehaviour
             isMoving = false;
         }
 
-        // ??ƒ ìµœë? ?ë„ë¡??¤ì •
+        // Ç×»ó ÃÖ´ë ¼Óµµ·Î ¼³Á¤
         if (isMoving)
         {
             rigid.velocity = new Vector2(h * maxSpeed, rigid.velocity.y);
         }
 
-        // ë¬´ë¸Œ ? ë‹ˆë©”ì´??
+        // ¹«ºê ¾Ö´Ï¸ŞÀÌ¼Ç
         anim.SetBool("isWalking", isMoving);
 
         if (curTime <= 0)
@@ -101,13 +104,13 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(rigid.velocity.y < 0) // ?´ë ¤ê°??Œë§Œ ?ˆì´ìºìŠ¤?¸ë? ??
+        if(rigid.velocity.y < 0) // ³»·Á°¥ ¶§¸¸ ·¹ÀÌÄ³½ºÆ®¸¦ ½ô
         {
-            // ?ˆì´ìºìŠ¤??ê·¸ë¦¬ê¸?
+            // ·¹ÀÌÄ³½ºÆ® ±×¸®±â
             Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
-            // ?ˆì´ìºìŠ¤???ˆíŠ¸, ?ˆì´?´ë§ˆ?¤í¬ ?¸ì‹
+            // ·¹ÀÌÄ³½ºÆ® È÷Æ®, ·¹ÀÌ¾î¸¶½ºÅ© ÀÎ½Ä
             RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
-            // ì°©ì?
+            // ÂøÁö
             if(rayHit.collider != null)
                 if(rayHit.distance < 1.2f)
                     anim.SetBool("isJumping", false);
@@ -115,33 +118,68 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) // ?¼ê²©
+    private void OnCollisionEnter2D(Collision2D collision) // ÇÇ°İ
     {
-        // ?Œë ˆ?´ì–´ê°€ ëª¬ìŠ¤?°ë‘ ?‘ì´‰??
+        // ÇÃ·¹ÀÌ¾î°¡ ¸ó½ºÅÍ¶û Á¢ÃË½Ã
         if (collision.gameObject.tag == "Enemy")
         {
             OnDamaged(collision.transform.position);
         }
     }
-    private void OnDamaged(Vector2 targetPos) // ?¼ê²©???¤ì •
+
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        // ?ˆì´?´ë? PlayDamegedë¡?ë³€ê²?
+        if (collision.gameObject.tag == "Item")
+        {
+            // Point È¹µæ
+            bool isBronze = collision.gameObject.name.Contains("Bronze");
+            bool isSilver = collision.gameObject.name.Contains("Silver");
+            bool isGold = collision.gameObject.name.Contains("Gold");
+            if(isBronze)
+                gameManager.stagePoint += 50;
+            else if(isSilver)
+                gameManager.stagePoint += 100;
+            else if(isGold)
+                gameManager.stagePoint += 300;
+            // Item »èÁ¦
+            collision.gameObject.SetActive(false);
+        }
+        else if (collision.gameObject.tag == "Finish")
+        {
+            // Next Stage
+            gameManager.NextStage();
+        }
+    }
+    private void OnDamaged(Vector2 targetPos) // ÇÇ°İ½Ã ¼³Á¤
+    {
+        // Ã¼·Â °¨¼Ò
+        gameManager.HealthDown();
+
+        // ·¹ÀÌ¾î¸¦ PlayDameged·Î º¯°æ
         gameObject.layer = 11;
 
-        // ?¼ê²©???‰ìƒ ë°??¬ëª…???¤ì •
+        // ÇÇ°İ½Ã »ö»ó ¹× Åõ¸íµµ ¼³Á¤
         spriteRenderer.color = new Color(1, 1, 1, 0.4f);
 
-        // ?¼ê²©??ë°€?¤ë‚¨
+        // ÇÇ°İ½Ã ¹Ğ·Á³²
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
         rigid.AddForce(new Vector2(dirc, 1) * 20, ForceMode2D.Impulse);
 
-        // ? ë‹ˆë©”ì´??
+        // ¾Ö´Ï¸ŞÀÌ¼Ç
         anim.SetTrigger("doDamaged");
-        Invoke("OffDamaged", 1); // Player ?ˆì´?´ë¡œ ?Œì•„ê°€???œê°„(ë¬´ì ?œê°„?¤ì •)
+        Invoke("OffDamaged", 1); // Player ·¹ÀÌ¾î·Î µ¹¾Æ°¡´Â ½Ã°£(¹«Àû½Ã°£¼³Á¤)
     }
-    private void OffDamaged() // ?ˆì´?´ë? Playerë¡?ë³€ê²?
+    private void OffDamaged() // ·¹ÀÌ¾î¸¦ Player·Î º¯°æ
     {
         gameObject.layer = 10;
         spriteRenderer.color = new Color(1, 1, 1, 1);
+    }
+
+    public void OnDie()
+    {
+        spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+        spriteRenderer.flipY = true;
+        capsuleCollider.enabled = false;
+        rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
     }
 }
