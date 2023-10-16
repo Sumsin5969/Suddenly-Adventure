@@ -5,21 +5,21 @@ using UnityEngine;
 public class Camera : MonoBehaviour
 {
 
-    public float cameraSpeed = 5.0f; // 카메라 속도
-    public GameObject player; // 목표 오브젝트
+    public GameObject target; // 카메라가 따라갈 대상
+    public float moveSpeed; // 카메라가 따라갈 속도
+    private Vector3 targetPosition; // 대상의 현재 위치
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
-        // 카메라가 플레이어를 추적
-        Vector3 dir = player.transform.position - this.transform.position;
-        Vector3 moveVector = new Vector3(dir.x * cameraSpeed * Time.deltaTime, dir.y * cameraSpeed * Time.deltaTime, 0.0f);
-        this.transform.Translate(moveVector);
+        // 대상이 있는지 체크
+        if (target.gameObject != null)
+        {
+            // this는 카메라를 의미 (z값은 카메라값을 그대로 유지)
+            targetPosition.Set(target.transform.position.x, target.transform.position.y + 2f, this.transform.position.z);
+
+            // vectorA -> B까지 T의 속도로 이동
+            this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, moveSpeed * Time.deltaTime);
+        }
     }
 }
