@@ -175,7 +175,7 @@ public class PlayerMove : MonoBehaviour
         spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 
-    public void OnDie()
+    public void OnDie() // 플레이어 사망시
     {
         spriteRenderer.color = new Color(1, 1, 1, 0.4f);
         spriteRenderer.flipY = true;
