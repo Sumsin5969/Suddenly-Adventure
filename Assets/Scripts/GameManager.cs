@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
             Stages[stageIndex].SetActive(true);
             PlayerReposition();
 
-            UIStage.text = "STAGE" + (stageIndex + 1);
+            UIStage.text = "STAGE " + (stageIndex + 1);
         }
         else { // 게임 클리어시
             // 플레이어 컨트롤 잠금
