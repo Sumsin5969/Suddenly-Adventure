@@ -1,6 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
@@ -10,6 +12,16 @@ public class GameManager : MonoBehaviour
     public int health;
     public PlayerMove player;
     public GameObject[] Stages;
+
+    public Image[] UIhealth;
+    public Text UIPoint;
+    public Text UIStage;
+    public GameObject UIRestartBtn;
+
+    void Update() // 점수 업데이트
+    {
+        UIPoint.text = (totalPoint + stagePoint).ToString();
+    }
     public void NextStage()
     {
         // 스테이지 바꾸기
@@ -19,12 +31,19 @@ public class GameManager : MonoBehaviour
             stageIndex++;
             Stages[stageIndex].SetActive(true);
             PlayerReposition();
+
+            UIStage.text = "STAGE" + (stageIndex + 1);
         }
         else { // 게임 클리어시
             // 플레이어 컨트롤 잠금
             Time.timeScale = 0;
             //결과 UI
             Debug.Log("게임 클리어!");
+            //Retry 버튼 UI
+            UIRestartBtn.SetActive(true);
+            Text btnText = UIRestartBtn.GetComponentInChildren<Text>();
+            btnText.text = "Clear!";
+            UIRestartBtn.SetActive(true);
         }
         // Calculate Point
         totalPoint += stagePoint;
@@ -34,14 +53,21 @@ public class GameManager : MonoBehaviour
     public void HealthDown()
     {
         if (health > 1)
-            health --;
-        else {
+        {
+            health--;
+            UIhealth[health].color = new Color(1, 0, 0, 0.4f);
+        }
+        else
+        {
+            // 모든 Health UI OFF
+            UIhealth[0].color = new Color(1, 0, 0, 0.4f);
             // 플레이어 죽음
             player.OnDie();
 
             //  결과 UI
             Debug.Log("죽었습니다!");
-
+            // Retry 버튼 UI
+            UIRestartBtn.SetActive(true);
         }
     }
 
@@ -62,5 +88,11 @@ public class GameManager : MonoBehaviour
     {
         player.transform.position = new Vector3(-6, 4, -1);
         player.VelocityZero();
+    }
+
+    public void Restart()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene(1);
     }
 }
