@@ -5,18 +5,26 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
+    public GameManager gameManager;
+    public AudioClip audioJump;
+    public AudioClip audioAttack;
+    public AudioClip audioDamaged;
+    public AudioClip audioItem;
+    public AudioClip audioDie;
+    public AudioClip audioFinish;
     public float maxSpeed;
     public float jumpPower;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
     CapsuleCollider2D capsuleCollider;
+    AudioSource audioSource;
     bool isMoving = false;
     private float curTime;
     public float coolTime = 0.5f;
     public Transform pos;
     public Vector3 boxSize;
-    public GameManager gameManager;
+    
 
 
     void Awake()
@@ -25,18 +33,46 @@ public class PlayerMove : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
+        audioSource = GetComponent<AudioSource>();
     }
 
+    void PlaySound(string action) // Sound
+    {
+        switch (action)
+        {
+            case "JUMP":
+                audioSource.clip = audioJump;
+                break;
+            case "ATTACK":
+                audioSource.clip = audioAttack;
+                break;
+            case "DAMAGED":
+                audioSource.clip = audioDamaged;
+                break;
+            case "ITEM":
+                audioSource.clip = audioItem;
+                break;
+            case "DIE":
+                audioSource.clip = audioDie;
+                break;
+            case "FINISH":
+                audioSource.clip = audioFinish;
+                break;
+        }
+    }
+    
+    
     void Update()
     {
-        // ¹«ÇÑÁ¡ÇÁ ¹æÁö
+        // ë¬´í•œì í”„ ë°©ì§€
         if (Input.GetKeyDown(KeyCode.UpArrow) && !anim.GetBool("isJumping"))
         {
             rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
             anim.SetBool("isJumping", true);
+            PlaySound("JUMP"); // Sound
         }
 
-        // ¹æÇâ ÀüÈ¯
+        // ë°©í–¥ ì „í™˜
         if(Input.GetButton("Horizontal"))
         {
             if (Input.GetAxisRaw("Horizontal") < 0)
@@ -49,11 +85,11 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        float h = Input.GetAxis("Horizontal"); // Å°º¸µå ÀÔ·Â°ª
+        float h = Input.GetAxis("Horizontal"); // í‚¤ë³´ë“œ ì…ë ¥ê°’
 
         
             
-        // Å° ÀÔ·ÂÀÌ ÀÖ´Â °æ¿ì¿¡¸¸ ¾Ö´Ï¸ŞÀÌ¼ÇÀÌ ³ª¿È
+        // í‚¤ ì…ë ¥ì´ ìˆëŠ” ê²½ìš°ì—ë§Œ ì• ë‹ˆë©”ì´ì…˜ì´ ë‚˜ì˜´
         if (Mathf.Abs(h) > 0.1f)
         {
             isMoving = true;
@@ -63,29 +99,30 @@ public class PlayerMove : MonoBehaviour
             isMoving = false;
         }
 
-        // Ç×»ó ÃÖ´ë ¼Óµµ·Î ¼³Á¤
+        // í•­ìƒ ìµœëŒ€ ì†ë„ë¡œ ì„¤ì •
         if (isMoving)
         {
             rigid.velocity = new Vector2(h * maxSpeed, rigid.velocity.y);
         }
 
-        // ¹«ºê ¾Ö´Ï¸ŞÀÌ¼Ç
+        // ë¬´ë¸Œ ì• ë‹ˆë©”ì´ì…˜
         anim.SetBool("isWalking", isMoving);
 
         if (curTime <= 0)
         {
-            // 'Z' Å°¸¦ »ç¿ëÇØ °ø°İ
+            // 'Z' í‚¤ë¥¼ ì‚¬ìš©í•´ ê³µê²©
             if (Input.GetKey(KeyCode.Z))
             {
                 Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);
 
-                // °ø°İ ¹üÀ§ ¾È¿¡¼­ °ø°İÇÏ¸é µğ¹ö±× ·Î±× Ãâ·Â
+                // ê³µê²© ë²”ìœ„ ì•ˆì—ì„œ ê³µê²©í•˜ë©´ ë””ë²„ê·¸ ë¡œê·¸ ì¶œë ¥
                 foreach (Collider2D collider in collider2Ds)
                 {
                     Debug.Log(collider.tag);
                 }
 
                 anim.SetTrigger("attack");
+                PlaySound("ATTACK"); // Sound
                 curTime = coolTime;
             }
         }
@@ -95,7 +132,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    // °ø°İ ¹üÀ§ ±×¸®±â
+    // ê³µê²© ë²”ìœ„ ê·¸ë¦¬ê¸°
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
@@ -104,13 +141,13 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(rigid.velocity.y < 0) // ³»·Á°¥ ¶§¸¸ ·¹ÀÌÄ³½ºÆ®¸¦ ½ô
+        if(rigid.velocity.y < 0) // ë‚´ë ¤ê°ˆ ë•Œë§Œ ë ˆì´ìºìŠ¤íŠ¸ë¥¼ ì¨
         {
-            // ·¹ÀÌÄ³½ºÆ® ±×¸®±â
+            // ë ˆì´ìºìŠ¤íŠ¸ ê·¸ë¦¬ê¸°
             Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
-            // ·¹ÀÌÄ³½ºÆ® È÷Æ®, ·¹ÀÌ¾î¸¶½ºÅ© ÀÎ½Ä
+            // ë ˆì´ìºìŠ¤íŠ¸ íˆíŠ¸, ë ˆì´ì–´ë§ˆìŠ¤í¬ ì¸ì‹
             RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
-            // ÂøÁö
+            // ì°©ì§€
             if(rayHit.collider != null)
                 if(rayHit.distance < 1.2f)
                     anim.SetBool("isJumping", false);
@@ -118,9 +155,9 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void OnCollisionEnter2D(Collision2D collision) // ÇÇ°İ
+    private void OnCollisionEnter2D(Collision2D collision) // í”¼ê²©
     {
-        // ÇÃ·¹ÀÌ¾î°¡ ¸ó½ºÅÍ¶û Á¢ÃË½Ã
+        // í”Œë ˆì´ì–´ê°€ ëª¬ìŠ¤í„°ë‘ ì ‘ì´‰ì‹œ
         if (collision.gameObject.tag == "Enemy")
         {
             OnDamaged(collision.transform.position);
@@ -131,7 +168,7 @@ public class PlayerMove : MonoBehaviour
     {
         if (collision.gameObject.tag == "Item")
         {
-            // Point È¹µæ
+            // Point íšë“
             bool isBronze = collision.gameObject.name.Contains("Bronze");
             bool isSilver = collision.gameObject.name.Contains("Silver");
             bool isGold = collision.gameObject.name.Contains("Gold");
@@ -141,46 +178,53 @@ public class PlayerMove : MonoBehaviour
                 gameManager.stagePoint += 100;
             else if(isGold)
                 gameManager.stagePoint += 300;
-            // Item »èÁ¦
+            // Item ì‚­ì œ
             collision.gameObject.SetActive(false);
+
+            // Sound
+            PlaySound("ITEM");
         }
         else if (collision.gameObject.tag == "Finish")
         {
             // Next Stage
             gameManager.NextStage();
+            // Sound
+            PlaySound("FINISH");
         }
     }
-    private void OnDamaged(Vector2 targetPos) // ÇÇ°İ½Ã ¼³Á¤
+    private void OnDamaged(Vector2 targetPos) // í”¼ê²©ì‹œ ì„¤ì •
     {
-        // Ã¼·Â °¨¼Ò
+        // ì²´ë ¥ ê°ì†Œ
         gameManager.HealthDown();
 
-        // ·¹ÀÌ¾î¸¦ PlayDameged·Î º¯°æ
+        // ë ˆì´ì–´ë¥¼ PlayDamegedë¡œ ë³€ê²½
         gameObject.layer = 11;
 
-        // ÇÇ°İ½Ã »ö»ó ¹× Åõ¸íµµ ¼³Á¤
+        // í”¼ê²©ì‹œ ìƒ‰ìƒ ë° íˆ¬ëª…ë„ ì„¤ì •
         spriteRenderer.color = new Color(1, 1, 1, 0.4f);
 
-        // ÇÇ°İ½Ã ¹Ğ·Á³²
+        // í”¼ê²©ì‹œ ë°€ë ¤ë‚¨
         int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
         rigid.AddForce(new Vector2(dirc, 1) * 20, ForceMode2D.Impulse);
 
-        // ¾Ö´Ï¸ŞÀÌ¼Ç
+        // ì• ë‹ˆë©”ì´ì…˜
         anim.SetTrigger("doDamaged");
-        Invoke("OffDamaged", 1); // Player ·¹ÀÌ¾î·Î µ¹¾Æ°¡´Â ½Ã°£(¹«Àû½Ã°£¼³Á¤)
+        PlaySound("DAMAGED"); // Sound
+        Invoke("OffDamaged", 1); // Player ë ˆì´ì–´ë¡œ ëŒì•„ê°€ëŠ” ì‹œê°„(ë¬´ì ì‹œê°„ì„¤ì •)
     }
-    private void OffDamaged() // ·¹ÀÌ¾î¸¦ Player·Î º¯°æ
+    private void OffDamaged() // ë ˆì´ì–´ë¥¼ Playerë¡œ ë³€ê²½
     {
         gameObject.layer = 10;
         spriteRenderer.color = new Color(1, 1, 1, 1);
     }
 
-    public void OnDie() // ÇÃ·¹ÀÌ¾î »ç¸Á½Ã
+    public void OnDie() // í”Œë ˆì´ì–´ ì‚¬ë§ì‹œ
     {
         spriteRenderer.color = new Color(1, 1, 1, 0.4f);
         spriteRenderer.flipY = true;
         capsuleCollider.enabled = false;
         rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+        PlaySound("DIE"); // Sound
     }
 
     public void VelocityZero()
