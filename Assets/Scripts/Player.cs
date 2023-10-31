@@ -42,21 +42,27 @@ public class PlayerMove : MonoBehaviour
         {
             case "JUMP":
                 audioSource.clip = audioJump;
+                audioSource.Play();
                 break;
             case "ATTACK":
                 audioSource.clip = audioAttack;
+                audioSource.Play();
                 break;
             case "DAMAGED":
                 audioSource.clip = audioDamaged;
+                audioSource.Play();
                 break;
             case "ITEM":
                 audioSource.clip = audioItem;
+                audioSource.Play();
                 break;
             case "DIE":
                 audioSource.clip = audioDie;
+                audioSource.Play();
                 break;
             case "FINISH":
                 audioSource.clip = audioFinish;
+                audioSource.Play();
                 break;
         }
     }
