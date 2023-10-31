@@ -78,6 +78,27 @@ public class PlayerMove : MonoBehaviour
             PlaySound("JUMP"); // Sound
         }
 
+        if(rigid.velocity.y < 0) // 내려갈 때
+        {
+            // 레이캐스트 그리기
+            Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
+
+            // 레이캐스트 히트, 레이어마스크 인식
+            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
+
+            // 착지
+            if(rayHit.collider != null){
+                if(rayHit.distance < 1.0f){
+                    anim.SetBool("isJumping", false);
+                    anim.SetBool("isFalling", false);
+                    Debug.Log(rayHit.collider.name);
+                }
+            }
+            else
+                anim.SetBool("isFalling", true);
+        }
+        else
+            anim.SetBool("isFalling", false);
         // 방향 전환
         if(Input.GetButton("Horizontal"))
         {
@@ -95,7 +116,7 @@ public class PlayerMove : MonoBehaviour
 
         
             
-        // 키 입력이 있는 경우에만 애니메이션이 나옴
+        // 이동 상태 여부
         if (Mathf.Abs(h) > 0.1f)
         {
             isMoving = true;
@@ -147,18 +168,7 @@ public class PlayerMove : MonoBehaviour
 
     void FixedUpdate()
     {
-        if(rigid.velocity.y < 0) // 내려갈 때만 레이캐스트를 쏨
-        {
-            // 레이캐스트 그리기
-            Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
-            // 레이캐스트 히트, 레이어마스크 인식
-            RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
-            // 착지
-            if(rayHit.collider != null)
-                if(rayHit.distance < 1.0f)
-                    anim.SetBool("isJumping", false);
-                    //Debug.Log(rayHit.collider.name);
-        }
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision) // 피격
