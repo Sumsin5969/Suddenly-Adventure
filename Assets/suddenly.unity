@@ -1729,7 +1729,7 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 10
+  m_LinearDrag: 5
   m_AngularDrag: 0.05
   m_GravityScale: 7.5
   m_Material: {fileID: 0}
@@ -2517,7 +2517,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 178199018}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ce67c1701b9586048a6ca98b938f1ec6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -8609,6 +8609,7 @@ GameObject:
   - component: {fileID: 729996384}
   - component: {fileID: 729996386}
   - component: {fileID: 729996385}
+  - component: {fileID: 729996387}
   m_Layer: 0
   m_Name: Background-2
   m_TagString: Untagged
@@ -8782,6 +8783,27 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!95 &729996387
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729996383}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 95d3d57f6a4d7cc44a87fa9627eefe5c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &733140297
 GameObject:
   m_ObjectHideFlags: 0
@@ -13339,7 +13361,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 1019214030}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ce67c1701b9586048a6ca98b938f1ec6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -15081,7 +15103,7 @@ BoxCollider2D:
   m_GameObject: {fileID: 1147990740}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ce67c1701b9586048a6ca98b938f1ec6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -23654,7 +23676,7 @@ PolygonCollider2D:
   m_GameObject: {fileID: 1542166603}
   m_Enabled: 1
   m_Density: 1
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 6200000, guid: ce67c1701b9586048a6ca98b938f1ec6, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
