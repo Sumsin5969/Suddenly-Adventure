@@ -5,20 +5,20 @@ using UnityEngine;
 public class Camera : MonoBehaviour
 {
 
-    public GameObject target; // Ä«¸Ş¶ó°¡ µû¶ó°¥ ´ë»ó
-    public float moveSpeed; // Ä«¸Ş¶ó°¡ µû¶ó°¥ ¼Óµµ
-    private Vector3 targetPosition; // ´ë»óÀÇ ÇöÀç À§Ä¡
+    public GameObject target; // ì¹´ë©”ë¼ê°€ ë”°ë¼ê°ˆ ëŒ€ìƒ
+    public float moveSpeed; // ì¹´ë©”ë¼ê°€ ë”°ë¼ê°ˆ ì†ë„
+    private Vector3 targetPosition; // ëŒ€ìƒì˜ í˜„ì¬ ìœ„ì¹˜
 
 
     void Update()
     {
-        // ´ë»óÀÌ ÀÖ´ÂÁö Ã¼Å©
+        // ëŒ€ìƒì´ ìˆëŠ”ì§€ ì²´í¬
         if (target.gameObject != null)
         {
-            // this´Â Ä«¸Ş¶ó¸¦ ÀÇ¹Ì (z°ªÀº Ä«¸Ş¶ó°ªÀ» ±×´ë·Î À¯Áö)
-            targetPosition.Set(target.transform.position.x, target.transform.position.y + 2f, this.transform.position.z);
+            // thisëŠ” ì¹´ë©”ë¼ë¥¼ ì˜ë¯¸ (zê°’ì€ ì¹´ë©”ë¼ê°’ì„ ê·¸ëŒ€ë¡œ ìœ ì§€)
+            targetPosition.Set(target.transform.position.x, target.transform.position.y + 4f, this.transform.position.z);
 
-            // vectorA -> B±îÁö TÀÇ ¼Óµµ·Î ÀÌµ¿
+            // vectorA -> Bê¹Œì§€ Tì˜ ì†ë„ë¡œ ì´ë™
             this.transform.position = Vector3.Lerp(this.transform.position, targetPosition, moveSpeed * Time.deltaTime);
         }
     }
