@@ -6,26 +6,9 @@ using UnityEngine.SceneManagement;
 
 public class TitleFade : MonoBehaviour
 {
-    public static TitleFade Instance; // 다른 스크립트에서 편하게 불러오기 위한 인스턴스 생성
+    
     public Image fadeImage;
-    public float fadeDuration;
-
-    private bool isFading = false;
-
-    private void Awake()
-    {
-        // 이미 인스턴스가 존재하면 새로 생성하지 않음
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
-
+    public float fadeDuration = 2.0f;
     void Start()
     {
         fadeImage.canvasRenderer.SetAlpha(1.0f);
@@ -34,12 +17,9 @@ public class TitleFade : MonoBehaviour
 
     public void LoadNextScene(string sceneName)
     {
-        if (!isFading)
-        {
-            isFading = true;
-            StartCoroutine(LoadSceneAfterFade(sceneName));
-        }
+         LoadSceneAfterFade(sceneName);
     }
+    
 
     private IEnumerator LoadSceneAfterFade(string sceneName)
     {
@@ -47,6 +27,5 @@ public class TitleFade : MonoBehaviour
         SceneManager.LoadScene(sceneName);
         fadeImage.CrossFadeAlpha(0.0f, fadeDuration, false);
         yield return new WaitForSeconds(fadeDuration);
-        isFading = false;
     }
 }
