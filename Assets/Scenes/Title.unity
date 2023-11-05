@@ -403,7 +403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeImage: {fileID: 1593475895}
-  sceneName: Suddenly
+  sceneName: Loading
 --- !u!1 &623322987
 GameObject:
   m_ObjectHideFlags: 0
@@ -1302,6 +1302,10 @@ PrefabInstance:
     - target: {fileID: 8077038026663057482, guid: 2b9a0ec1bc4472c40b7be24f54914b4e, type: 3}
       propertyPath: m_Name
       value: StartFading
+      objectReference: {fileID: 0}
+    - target: {fileID: 8077038026663057482, guid: 2b9a0ec1bc4472c40b7be24f54914b4e, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2452489622515916679, guid: 2b9a0ec1bc4472c40b7be24f54914b4e, type: 3}

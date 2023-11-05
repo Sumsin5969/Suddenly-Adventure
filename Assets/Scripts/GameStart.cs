@@ -9,7 +9,7 @@ public class GameStart : MonoBehaviour
     public Image fadeImage;
     private float fadeDuration = 3.0f;
     private AudioSource musicAudioSource;
-    private string sceneName = "Suddenly";
+    public string sceneName;
 
     void Start()
     {

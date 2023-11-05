@@ -16,11 +16,10 @@ public class TitleBGM : MonoBehaviour
     private void OnSceneUnloaded(Scene unloadedScene)
     {
         // 씬이 언로드될 때 실행될 코드
-        if (unloadedScene.name == "Title")
+        if (unloadedScene.name == "Loading")
         {
             AudioSource audioSource = GetComponent<AudioSource>();
             audioSource.Stop();
-            Destroy(gameObject);
         }
     }
 }
