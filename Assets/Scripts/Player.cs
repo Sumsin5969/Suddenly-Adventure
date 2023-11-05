@@ -147,7 +147,7 @@ public class PlayerMove : MonoBehaviour
                 {
                     if(collider.tag == "Enemy")
                     {
-                        Vector2 targetPos2 = new Vector2(rigid.position.x, 0);
+                        Vector2 targetPos2 = new Vector2(transform.position.x, 0);
                         collider.GetComponent<Enemy>().EnemyHit(1, targetPos2);
                     }
                 }
