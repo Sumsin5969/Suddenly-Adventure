@@ -18,13 +18,13 @@ public class GameManager : MonoBehaviour
     public Text UIStage;
     public GameObject UIRestartBtn;
 
-    void Update() // Á¡¼ö ¾÷µ¥ÀÌÆ®
+    void Update() // ì ìˆ˜ ì—…ë°ì´íŠ¸
     {
         UIPoint.text = (totalPoint + stagePoint).ToString();
     }
     public void NextStage()
     {
-        // ½ºÅ×ÀÌÁö ¹Ù²Ù±â
+        // ìŠ¤í…Œì´ì§€ ë°”ê¾¸ê¸°
         if (stageIndex < Stages.Length-1)
         {
             Stages[stageIndex].SetActive(false);
@@ -34,12 +34,12 @@ public class GameManager : MonoBehaviour
 
             UIStage.text = "STAGE " + (stageIndex + 1);
         }
-        else { // °ÔÀÓ Å¬¸®¾î½Ã
-            // ÇÃ·¹ÀÌ¾î ÄÁÆ®·Ñ Àá±İ
+        else { // ê²Œì„ í´ë¦¬ì–´ì‹œ
+            // í”Œë ˆì´ì–´ ì»¨íŠ¸ë¡¤ ì ê¸ˆ
             Time.timeScale = 0;
-            //°á°ú UI
-            Debug.Log("°ÔÀÓ Å¬¸®¾î!");
-            //Retry ¹öÆ° UI
+            //ê²°ê³¼ UI
+            Debug.Log("ê²Œì„ í´ë¦¬ì–´!");
+            //Retry ë²„íŠ¼ UI
             UIRestartBtn.SetActive(true);
             Text btnText = UIRestartBtn.GetComponentInChildren<Text>();
             btnText.text = "Clear!";
@@ -59,14 +59,14 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            // ¸ğµç Health UI OFF
+            // ëª¨ë“  Health UI OFF
             UIhealth[0].color = new Color(1, 0, 0, 0.4f);
-            // ÇÃ·¹ÀÌ¾î Á×À½
+            // í”Œë ˆì´ì–´ ì£½ìŒ
             player.OnDie();
 
-            //  °á°ú UI
-            Debug.Log("Á×¾ú½À´Ï´Ù!");
-            // Retry ¹öÆ° UI
+            //  ê²°ê³¼ UI
+            Debug.Log("ì£½ì—ˆìŠµë‹ˆë‹¤!");
+            // Retry ë²„íŠ¼ UI
             UIRestartBtn.SetActive(true);
         }
     }
@@ -75,11 +75,11 @@ public class GameManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            // ÇÃ·¹ÀÌ¾î¸¦ ¶¥ À§·Î ÀÌµ¿
+            // í”Œë ˆì´ì–´ë¥¼ ë•… ìœ„ë¡œ ì´ë™
             if (health > 1)
                 PlayerReposition();
 
-            // ¶³¾îÁö¸é Ã¼·Â°¨¼Ò
+            // ë–¨ì–´ì§€ë©´ ì²´ë ¥ê°ì†Œ
             HealthDown();
         }
     }

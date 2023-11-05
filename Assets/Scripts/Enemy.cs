@@ -1,19 +1,23 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Burst.CompilerServices;
 using UnityEngine;
 
-public class EnemyMove : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     Rigidbody2D rigid;
     Animator anim;
     SpriteRenderer spriteRenderer;
+    BoxCollider2D boxCollider;
 
     public int nextMove;
+    public int enemyhealth;
 
     void Awake()
     {
         rigid = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
+        boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         Invoke("Think", 3);
     }
@@ -32,7 +36,7 @@ public class EnemyMove : MonoBehaviour
             Turn();
     }
 
-    // Àç±Í ÇÔ¼ö
+    // ìž¬ê·€ í•¨ìˆ˜
     void Think()
     {
         // Set Next Active
@@ -45,7 +49,7 @@ public class EnemyMove : MonoBehaviour
         if (nextMove != 0)
             spriteRenderer.flipX = nextMove == 1;
 
-        // Recursive(Àç±Í)
+        // Recursive(ìž¬ê·€)
         float nextThinkTime = Random.Range(1f, 2f);
         Invoke("Think", nextThinkTime);
     }
@@ -57,5 +61,24 @@ public class EnemyMove : MonoBehaviour
 
         CancelInvoke();
         Invoke("Think", 3);
+    }
+
+    public void EnemyHit(int damage, Vector2 targetPos2)
+    {
+        enemyhealth -= damage;
+
+        if(enemyhealth <= 0) // ì  ì‚¬ë§
+        {
+            spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+            spriteRenderer.flipY = true;
+            boxCollider.enabled = false;
+            rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
+        }
+        else // ì  í”¼ê²©
+        {         
+            int dirc = transform.position.x - targetPos2.x > 0 ? 1 : -1;
+            rigid.AddForce(new Vector2(dirc, 0.5f) * 5, ForceMode2D.Impulse);
+                    
+        }
     }
 }

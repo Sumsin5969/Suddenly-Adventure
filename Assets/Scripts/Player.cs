@@ -145,7 +145,11 @@ public class PlayerMove : MonoBehaviour
                 // 공격 범위 안에서 공격하면 디버그 로그 출력
                 foreach (Collider2D collider in collider2Ds)
                 {
-                    Debug.Log(collider.tag);
+                    if(collider.tag == "Enemy")
+                    {
+                        Vector2 targetPos2 = new Vector2(rigid.position.x, 0);
+                        collider.GetComponent<Enemy>().EnemyHit(1, targetPos2);
+                    }
                 }
 
                 anim.SetTrigger("attack");
