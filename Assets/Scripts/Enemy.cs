@@ -9,7 +9,9 @@ public class Enemy : MonoBehaviour
     Animator anim;
     SpriteRenderer spriteRenderer;
     BoxCollider2D boxCollider;
-
+    public AudioSource audioSource;
+    public AudioClip audioBoar;
+    public AudioClip audioBoarDie;
     public int nextMove;
     public int enemyhealth;
 
@@ -19,6 +21,7 @@ public class Enemy : MonoBehaviour
         anim = GetComponent<Animator>();
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        audioSource = GetComponent<AudioSource>();
         Invoke("Think", 3);
     }
 
@@ -69,13 +72,18 @@ public class Enemy : MonoBehaviour
 
         if(enemyhealth <= 0) // 적 사망
         {
+            audioSource.clip = audioBoarDie;
+            audioSource.Play();
             spriteRenderer.color = new Color(1, 1, 1, 0.4f);
             spriteRenderer.flipY = true;
             boxCollider.enabled = false;
             rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
         }
         else // 적 피격
-        {         
+        {
+            anim.SetTrigger("doDamagedBoar");
+            audioSource.clip = audioBoar;
+            audioSource.Play();
             int dirc = transform.position.x - targetPos2.x > 0 ? 1 : -1;
             rigid.AddForce(new Vector2(dirc, 0.5f) * 5, ForceMode2D.Impulse);
                     
