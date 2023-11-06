@@ -8,6 +8,7 @@ TagManager:
   - Enemy
   - mainCamera
   - Item
+  - Finish_back
   layers:
   - Default
   - TransparentFX

@@ -22,6 +22,19 @@ public class GameManager : MonoBehaviour
     {
         UIPoint.text = (totalPoint + stagePoint).ToString();
     }
+
+    public void PrevStage()
+    {
+        if (stageIndex < Stages.Length)
+        {
+            Stages[stageIndex].SetActive(false);
+            stageIndex--;
+            Stages[stageIndex].SetActive(true);
+            PlayerReposition();
+
+            UIStage.text = "STAGE " + (stageIndex + 1);
+        }
+    }
     public void NextStage()
     {
         // 스테이지 바꾸기

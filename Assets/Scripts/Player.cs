@@ -211,6 +211,13 @@ public class PlayerMove : MonoBehaviour
             // Sound
             PlaySound("FINISH");
         }
+        else if (collision.gameObject.tag == "Finish_back")
+        {
+            // Prev Stage
+            gameManager.PrevStage();
+            // Sound
+            PlaySound("FINISH");
+        }
     }
     private void OnDamaged(Vector2 targetPos) // 피격시 설정
     {
