@@ -2012,26 +2012,31 @@ MonoBehaviour:
   gameManager: {fileID: 1935589977}
   audioJump: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
   audioAttack: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
+  audioAttack2: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
   audioDamaged: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
   audioItem: {fileID: 8300000, guid: 79180f511d89441b9aa23ccae1992fe0, type: 3}
   audioDie: {fileID: 8300000, guid: a0010a1a0c474473b81729eb770c485f, type: 3}
   audioFinish: {fileID: 8300000, guid: 7478151cf36724a7dada558f746c3633, type: 3}
   audioDash: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
+  audioDashCooldown: {fileID: 8300000, guid: 724131bc8a7f34041bb9f1701f0cb58d, type: 3}
   maxSpeed: 5
   speed: 5
   jumpPower: 30
   jumpCnt: 0
   jumpCount: 2
-  dashSpeed: 30
-  dashTime: 0.2
+  dashSpeed: 45
+  dashTime: 0.4
   defaultTime: 0.1
   checkRaidus: 0
   isLayer:
     serializedVersion: 2
     m_Bits: 256
-  coolTime: 0.5
+  coolTime: 0.3
   dashCooltime: 1
   dashFilltime: 0
+  comboTime: 0
+  comboResetTime: 0.5
+  comboCount: 0
   pos: {fileID: 1229465993}
   posJump: {fileID: 1883033847}
   boxSize: {x: 1.12, y: 1.2121212, z: 0}

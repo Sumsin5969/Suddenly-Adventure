@@ -9,11 +9,13 @@ public class PlayerMove : MonoBehaviour
     public GameManager gameManager;
     public AudioClip audioJump;
     public AudioClip audioAttack;
+    public AudioClip audioAttack2;
     public AudioClip audioDamaged;
     public AudioClip audioItem;
     public AudioClip audioDie;
     public AudioClip audioFinish;
     public AudioClip audioDash;
+    public AudioClip audioDashCooldown;
     public float maxSpeed;
     public float speed;
     public float jumpPower;
@@ -33,9 +35,12 @@ public class PlayerMove : MonoBehaviour
     bool isDash = false;
     bool isGround;
     private float curTime;
-    public float coolTime = 0.5f;
+    public float coolTime = 0.3f;
     public float dashCooltime;
     public float dashFilltime;
+    public float comboTime = 0f;
+    public float comboResetTime = 0.5f;
+    public int comboCount = 0;
     public Transform pos;
     public Transform posJump;
     public Vector3 boxSize;
@@ -129,7 +134,7 @@ public class PlayerMove : MonoBehaviour
         {
             jumpCnt--;
         }
-
+        // 점프 횟수 초기화
         if(isGround)
         {
             jumpCnt = jumpCount;
@@ -182,7 +187,7 @@ public class PlayerMove : MonoBehaviour
                 {
                     if(collider.tag == "Enemy")
                     {
-                        Vector2 targetPos2 = new Vector2(transform.position.x, 0);
+                        Vector2 targetPos2 = new Vector2(0, 0);
                         collider.GetComponent<Enemy>().EnemyHit(1, targetPos2);
                     }
                 }
@@ -190,6 +195,35 @@ public class PlayerMove : MonoBehaviour
                 anim.SetTrigger("attack");
                 PlaySound("ATTACK"); // Sound
                 curTime = coolTime;
+                comboCount++;
+
+                // 콤보 공격
+                if (comboCount == 1)
+                {
+                    Debug.Log("첫번째 콤보");
+                }
+                else if (comboCount == 2)
+                {
+                    audioSource.clip = audioAttack2;
+                    audioSource.Play();
+                    Debug.Log("두번째 콤보");
+                }
+                else if (comboCount == 3)
+                {
+                    Debug.Log("세번째 콤보");
+                }
+                else if (comboCount >= 3)
+                {
+                    ResetCombo();  
+                }
+            }
+
+            comboTime += Time.deltaTime;
+
+            // 콤보 시간이 넘어가면 콤보 카운트 리셋
+            if (comboTime >= comboResetTime)
+            {
+                ResetCombo();
             }
         }
         else
@@ -200,15 +234,15 @@ public class PlayerMove : MonoBehaviour
         dashFilltime += Time.deltaTime;
 
         //대쉬 쿨타임 돌면 시간초 고정
-        if(dashFilltime >= dashCooltime)
+        if (dashFilltime >= dashCooltime)
         {
-            dashFilltime = dashCooltime;
+            dashFilltime = dashCooltime;    
         }
 
         // 대쉬
-        if (dashFilltime < dashCooltime && Input.GetKeyUp(KeyCode.X))
+        if (dashFilltime < dashCooltime && Input.GetKeyDown(KeyCode.X))
         {
-            isDash = false;          
+            isDash = false;
         }
         else
         {
@@ -238,6 +272,13 @@ public class PlayerMove : MonoBehaviour
         }
         isDash = false;
 
+    }
+
+    // 콤보 리셋
+    void ResetCombo()
+    {
+        comboCount = 0;
+        comboTime = 0;
     }
 
     // 공격 범위 그리기
