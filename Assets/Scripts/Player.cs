@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
@@ -12,17 +13,29 @@ public class PlayerMove : MonoBehaviour
     public AudioClip audioItem;
     public AudioClip audioDie;
     public AudioClip audioFinish;
+    public AudioClip audioDash;
     public float maxSpeed;
+    public float speed;
     public float jumpPower;
+    public int jumpCnt;
+    public int jumpCount;
+    public float dashSpeed;
+    public float dashTime;
+    public float defaultTime;
+    public float checkRaidus;
+    public LayerMask isLayer;
     Rigidbody2D rigid;
     SpriteRenderer spriteRenderer;
     Animator anim;
     CapsuleCollider2D capsuleCollider;
     AudioSource audioSource;
     bool isMoving = false;
+    bool isDash = false;
+    bool isGround;
     private float curTime;
     public float coolTime = 0.5f;
     public Transform pos;
+    public Transform posJump;
     public Vector3 boxSize;
     
 
@@ -34,6 +47,7 @@ public class PlayerMove : MonoBehaviour
         anim = GetComponent<Animator>();
         capsuleCollider = GetComponent<CapsuleCollider2D>();
         audioSource = GetComponent<AudioSource>();
+        jumpCnt = jumpCount;
     }
 
     void PlaySound(string action) // Sound
@@ -70,15 +84,23 @@ public class PlayerMove : MonoBehaviour
     
     void Update()
     {
-        // 무한점프 방지
-        if (Input.GetKeyDown(KeyCode.UpArrow) && !anim.GetBool("isJumping"))
+        isGround = Physics2D.OverlapCircle(posJump.position, checkRaidus, isLayer);
+        
+        // 점프 (jumpCount 조절해서 2단 점프 가능)
+        if (isGround == true && Input.GetKeyDown(KeyCode.UpArrow) && jumpCnt > 0)
         {
-            rigid.AddForce(Vector2.up * jumpPower, ForceMode2D.Impulse);
+            rigid.velocity = Vector3.up * jumpPower;
+            anim.SetBool("isJumping", true);
+            PlaySound("JUMP"); // Sound
+        }
+        if (isGround == false && Input.GetKeyDown(KeyCode.UpArrow) && jumpCnt > 0)
+        {
+            rigid.velocity = Vector3.up * jumpPower;
             anim.SetBool("isJumping", true);
             PlaySound("JUMP"); // Sound
         }
 
-        if(rigid.velocity.y < 0) // 내려갈 때
+        if (rigid.velocity.y < 0) // 내려갈 때
         {
             // 레이캐스트 그리기
             Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
@@ -99,8 +121,21 @@ public class PlayerMove : MonoBehaviour
         }
         else
             anim.SetBool("isFalling", false);
+      
+
+        if (Input.GetKeyUp(KeyCode.UpArrow))
+        {
+            jumpCnt--;
+        }
+
+        if(isGround)
+        {
+            jumpCnt = jumpCount;
+            anim.SetBool("isJumping", false);
+        }
+
         // 방향 전환
-        if(Input.GetButton("Horizontal"))
+        if (Input.GetButton("Horizontal"))
         {
             if (Input.GetAxisRaw("Horizontal") < 0)
             {
@@ -113,9 +148,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         float h = Input.GetAxis("Horizontal"); // 키보드 입력값
-
         
-            
         // 이동 상태 여부
         if (Mathf.Abs(h) > 0.1f)
         {
@@ -161,6 +194,30 @@ public class PlayerMove : MonoBehaviour
         {
             curTime -= Time.deltaTime;
         }
+
+        // 대쉬
+        if(Input.GetKeyDown(KeyCode.X))
+        {
+            anim.SetTrigger("dash");
+            audioSource.clip = audioDash;
+            audioSource.Play();
+            isDash = true;
+        }
+
+        if(dashTime <= 0)
+        {
+            maxSpeed = speed;
+            if(isDash)
+            {
+                dashTime = defaultTime;
+            }
+        }
+        else
+        {
+            dashTime -= Time.deltaTime;
+            maxSpeed = dashSpeed;
+        }
+        isDash = false;
     }
 
     // 공격 범위 그리기

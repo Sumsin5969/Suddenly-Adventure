@@ -1967,6 +1967,7 @@ Transform:
   m_Children:
   - {fileID: 1229465993}
   - {fileID: 912172295}
+  - {fileID: 1883033847}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &145961671
@@ -2015,10 +2016,22 @@ MonoBehaviour:
   audioItem: {fileID: 8300000, guid: 79180f511d89441b9aa23ccae1992fe0, type: 3}
   audioDie: {fileID: 8300000, guid: a0010a1a0c474473b81729eb770c485f, type: 3}
   audioFinish: {fileID: 8300000, guid: 7478151cf36724a7dada558f746c3633, type: 3}
+  audioDash: {fileID: 8300000, guid: ffb159a21c8a04135a5616979c828fab, type: 3}
   maxSpeed: 5
+  speed: 5
   jumpPower: 30
+  jumpCnt: 0
+  jumpCount: 2
+  dashSpeed: 30
+  dashTime: 0.2
+  defaultTime: 0.1
+  checkRaidus: 0
+  isLayer:
+    serializedVersion: 2
+    m_Bits: 256
   coolTime: 0.5
   pos: {fileID: 1229465993}
+  posJump: {fileID: 1883033847}
   boxSize: {x: 1.12, y: 1.2121212, z: 0}
 --- !u!70 &145961674
 CapsuleCollider2D:
@@ -38761,6 +38774,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1495224351}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1883033846
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1883033847}
+  m_Layer: 10
+  m_Name: pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1883033847
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1883033846}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.62, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 145961670}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1885769474
 GameObject:

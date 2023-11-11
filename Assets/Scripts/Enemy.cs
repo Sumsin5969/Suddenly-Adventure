@@ -72,7 +72,7 @@ public class Enemy : MonoBehaviour
 
         if(enemyhealth <= 0) // 적 사망
         {
-            Invoke("Think", 0);
+            nextMove = 0;
             audioSource.clip = audioBoarDie;
             audioSource.Play();
             spriteRenderer.color = new Color(1, 1, 1, 0.4f);
