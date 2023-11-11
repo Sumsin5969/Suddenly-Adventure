@@ -34,6 +34,8 @@ public class PlayerMove : MonoBehaviour
     bool isGround;
     private float curTime;
     public float coolTime = 0.5f;
+    public float dashCooltime;
+    public float dashFilltime;
     public Transform pos;
     public Transform posJump;
     public Vector3 boxSize;
@@ -122,7 +124,7 @@ public class PlayerMove : MonoBehaviour
         else
             anim.SetBool("isFalling", false);
       
-
+        // 점프 횟수 카운트
         if (Input.GetKeyUp(KeyCode.UpArrow))
         {
             jumpCnt--;
@@ -195,19 +197,36 @@ public class PlayerMove : MonoBehaviour
             curTime -= Time.deltaTime;
         }
 
-        // 대쉬
-        if(Input.GetKeyDown(KeyCode.X))
+        dashFilltime += Time.deltaTime;
+
+        //대쉬 쿨타임 돌면 시간초 고정
+        if(dashFilltime >= dashCooltime)
         {
-            anim.SetTrigger("dash");
-            audioSource.clip = audioDash;
-            audioSource.Play();
-            isDash = true;
+            dashFilltime = dashCooltime;
         }
 
-        if(dashTime <= 0)
+        // 대쉬
+        if (dashFilltime < dashCooltime && Input.GetKeyUp(KeyCode.X))
+        {
+            isDash = false;          
+        }
+        else
+        {
+            if (dashFilltime >= dashCooltime && Input.GetKeyDown(KeyCode.X))
+            {
+                anim.SetTrigger("dash");
+                audioSource.clip = audioDash;
+                audioSource.Play();
+                dashFilltime = 0;
+                isDash = true;
+            }
+        }
+
+        // 대쉬 시간 및 속도 설정
+        if (dashTime <= 0)
         {
             maxSpeed = speed;
-            if(isDash)
+            if (isDash)
             {
                 dashTime = defaultTime;
             }
@@ -218,6 +237,7 @@ public class PlayerMove : MonoBehaviour
             maxSpeed = dashSpeed;
         }
         isDash = false;
+
     }
 
     // 공격 범위 그리기

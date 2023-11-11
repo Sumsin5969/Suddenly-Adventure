@@ -2030,6 +2030,8 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 256
   coolTime: 0.5
+  dashCooltime: 1
+  dashFilltime: 0
   pos: {fileID: 1229465993}
   posJump: {fileID: 1883033847}
   boxSize: {x: 1.12, y: 1.2121212, z: 0}
