@@ -240,6 +240,7 @@ public class PlayerMove : MonoBehaviour
             }
 
             comboTime += Time.deltaTime;
+            Debug.Log("콤보 타임" + comboTime);
 
             // 콤보 시간이 넘어가면 콤보 카운트 리셋
             if (comboTime >= comboResetTime)
