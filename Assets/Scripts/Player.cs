@@ -96,12 +96,14 @@ public class PlayerMove : MonoBehaviour
         // 점프 (jumpCount 조절해서 2단 점프 가능)
         if (isGround == true && Input.GetKeyDown(KeyCode.UpArrow) && jumpCnt > 0)
         {
+            ResetCombo();
             rigid.velocity = Vector3.up * jumpPower;
             anim.SetBool("isJumping", true);
             PlaySound("JUMP"); // Sound
         }
         if (isGround == false && Input.GetKeyDown(KeyCode.UpArrow) && jumpCnt > 0)
         {
+            ResetCombo();
             rigid.velocity = Vector3.up * jumpPower;
             anim.SetBool("isJumping", true);
             PlaySound("JUMP"); // Sound
