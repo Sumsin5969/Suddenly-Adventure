@@ -192,8 +192,6 @@ public class PlayerMove : MonoBehaviour
                     }
                 }
 
-                
-                PlaySound("ATTACK"); // Sound
                 curTime = coolTime;
                 comboCount++;
 
@@ -201,6 +199,7 @@ public class PlayerMove : MonoBehaviour
                 if (comboCount == 1)
                 {
                     anim.SetTrigger("attack");
+                    PlaySound("ATTACK");
                     Debug.Log("첫번째 콤보");
                 }
                 else if (comboCount == 2)
@@ -231,6 +230,7 @@ public class PlayerMove : MonoBehaviour
                         }
                     }
                     anim.SetTrigger("attack3");
+                    PlaySound("ATTACK");
                     Debug.Log("세번째 콤보");
                 }
                 else if (comboCount > 3)
