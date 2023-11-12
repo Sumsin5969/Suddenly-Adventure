@@ -204,15 +204,33 @@ public class PlayerMove : MonoBehaviour
                 }
                 else if (comboCount == 2)
                 {
+                    foreach (Collider2D collider in collider2Ds)
+                    {
+                        if (collider.tag == "Enemy")
+                        {
+                            Vector2 targetPos2 = new Vector2(0, 0);
+                            // 두번째 콤보는 데미지를 2로 설정
+                            collider.GetComponent<Enemy>().EnemyHit(2, targetPos2);
+                        }
+                    }
                     audioSource.clip = audioAttack2;
                     audioSource.Play();
                     Debug.Log("두번째 콤보");
                 }
                 else if (comboCount == 3)
                 {
+                    foreach (Collider2D collider in collider2Ds)
+                    {
+                        if (collider.tag == "Enemy")
+                        {
+                            Vector2 targetPos2 = new Vector2(0, 0);
+                            // 세번째 콤보는 데미지를 3로 설정
+                            collider.GetComponent<Enemy>().EnemyHit(3, targetPos2);
+                        }
+                    }
                     Debug.Log("세번째 콤보");
                 }
-                else if (comboCount >= 3)
+                else if (comboCount >= 4)
                 {
                     ResetCombo();  
                 }
