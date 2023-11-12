@@ -192,7 +192,7 @@ public class PlayerMove : MonoBehaviour
                     }
                 }
 
-                anim.SetTrigger("attack");
+                
                 PlaySound("ATTACK"); // Sound
                 curTime = coolTime;
                 comboCount++;
@@ -200,6 +200,7 @@ public class PlayerMove : MonoBehaviour
                 // 콤보 공격
                 if (comboCount == 1)
                 {
+                    anim.SetTrigger("attack");
                     Debug.Log("첫번째 콤보");
                 }
                 else if (comboCount == 2)
@@ -213,6 +214,7 @@ public class PlayerMove : MonoBehaviour
                             collider.GetComponent<Enemy>().EnemyHit(2, targetPos2);
                         }
                     }
+                    anim.SetTrigger("attack2");
                     audioSource.clip = audioAttack2;
                     audioSource.Play();
                     Debug.Log("두번째 콤보");
@@ -228,9 +230,10 @@ public class PlayerMove : MonoBehaviour
                             collider.GetComponent<Enemy>().EnemyHit(3, targetPos2);
                         }
                     }
+                    anim.SetTrigger("attack3");
                     Debug.Log("세번째 콤보");
                 }
-                else if (comboCount >= 4)
+                else if (comboCount > 3)
                 {
                     ResetCombo();  
                 }
