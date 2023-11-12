@@ -233,9 +233,9 @@ public class PlayerMove : MonoBehaviour
                     PlaySound("ATTACK");
                     Debug.Log("세번째 콤보");
                 }
-                else if (comboCount > 3)
+                else if (comboCount >= 4)
                 {
-                    ResetCombo();  
+                    ResetCombo();
                 }
             }
 
