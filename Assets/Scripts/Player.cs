@@ -183,6 +183,12 @@ public class PlayerMove : MonoBehaviour
             // 'Z' 키를 사용해 공격
             if (Input.GetKey(KeyCode.X))
             {
+                // 땅에 있을 때 공격하면 멈춤
+                if(isGround == true)
+                {
+                    speed = 0;
+                }
+                
                 Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);
 
                 // 공격 범위 안에서 공격하면 디버그 로그 출력
@@ -254,6 +260,12 @@ public class PlayerMove : MonoBehaviour
         else
         {
             curTime -= Time.deltaTime;
+        }
+
+        // 공격 멈추면 다시 이동 가능
+        if(Input.GetKeyUp(KeyCode.X))
+        {
+            speed = 5;
         }
 
         dashFilltime += Time.deltaTime;
