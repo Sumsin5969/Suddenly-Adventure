@@ -9,6 +9,7 @@ TagManager:
   - mainCamera
   - Item
   - Finish_back
+  - Beam
   layers:
   - Default
   - TransparentFX
@@ -23,7 +24,7 @@ TagManager:
   - Player
   - PlayerDamaged
   - Fade
-  - 
+  - Beam
   - 
   - 
   - 

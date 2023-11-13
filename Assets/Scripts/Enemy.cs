@@ -86,8 +86,8 @@ public class Enemy : MonoBehaviour
             audioSource.clip = audioBoar;
             audioSource.Play();
             int dirc = transform.position.x - targetPos2.x > 0 ? 1 : -1;
-            rigid.AddForce(new Vector2(dirc, 0.5f) * 5, ForceMode2D.Impulse);
-                    
+            rigid.AddForce(new Vector2(dirc, 0.5f) * 5, ForceMode2D.Impulse);            
         }
     }
+
 }

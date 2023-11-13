@@ -1968,6 +1968,7 @@ Transform:
   - {fileID: 482170000}
   - {fileID: 912172295}
   - {fileID: 1883033847}
+  - {fileID: 1115969488}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!50 &145961671
@@ -2040,6 +2041,8 @@ MonoBehaviour:
   pos: {fileID: 482170000}
   posJump: {fileID: 1883033847}
   boxSize: {x: 1.5, y: 1.25, z: 0}
+  SwordBeam: {fileID: 889994370596951765, guid: 211fd84ee2c820948bc2307d253987c0, type: 3}
+  Player: {fileID: 145961667}
 --- !u!70 &145961674
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -18199,6 +18202,37 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 949748501}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1115969487
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1115969488}
+  m_Layer: 10
+  m_Name: posBeam
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1115969488
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1115969487}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 2.24, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 145961670}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1118675821
 GameObject:

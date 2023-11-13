@@ -44,7 +44,8 @@ public class PlayerMove : MonoBehaviour
     public Transform pos;
     public Transform posJump;
     public Vector3 boxSize;
-    
+    public GameObject SwordBeam;
+    public GameObject Player;
 
 
     void Awake()
@@ -196,7 +197,7 @@ public class PlayerMove : MonoBehaviour
                 {
                     if(collider.tag == "Enemy")
                     {
-                        Vector2 targetPos2 = new Vector2(0, 0);
+                        Vector2 targetPos2 = Player.gameObject.transform.position;
                         collider.GetComponent<Enemy>().EnemyHit(1, targetPos2);
                     }
                 }
@@ -240,6 +241,8 @@ public class PlayerMove : MonoBehaviour
                     }
                     anim.SetTrigger("attack3");
                     PlaySound("ATTACK");
+                    // 3타에 검기 소환
+                    Instantiate(SwordBeam, pos.position, transform.rotation);
                     Debug.Log("세번째 콤보");
                 }
                 else if (comboCount >= 4)
