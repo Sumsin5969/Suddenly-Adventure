@@ -280,13 +280,13 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 대쉬
-        if (dashFilltime < dashCooltime && Input.GetKeyDown(KeyCode.C))
+        if (dashFilltime < dashCooltime && Input.GetKeyDown(KeyCode.C) && isMoving == true)
         {
             isDash = false;
         }
         else
         {
-            if (dashFilltime >= dashCooltime && Input.GetKeyDown(KeyCode.C))
+            if (dashFilltime >= dashCooltime && Input.GetKeyDown(KeyCode.C) && isMoving == true)
             {
                 anim.SetTrigger("dash");
                 audioSource.clip = audioDash;
