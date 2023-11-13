@@ -242,7 +242,7 @@ public class PlayerMove : MonoBehaviour
                     anim.SetTrigger("attack3");
                     PlaySound("ATTACK");
                     // 3타에 검기 소환
-                    Instantiate(SwordBeam, pos.position, transform.rotation);
+                    //Instantiate(SwordBeam, pos.position, transform.rotation);
                     Debug.Log("세번째 콤보");
                 }
                 else if (comboCount >= 4)
