@@ -2025,7 +2025,7 @@ MonoBehaviour:
   jumpPower: 30
   jumpCnt: 0
   jumpCount: 2
-  dashSpeed: 45
+  dashSpeed: 30
   dashTime: 0.4
   defaultTime: 0.1
   checkRaidus: 0
