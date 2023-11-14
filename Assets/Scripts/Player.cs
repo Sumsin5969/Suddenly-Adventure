@@ -183,7 +183,7 @@ public class PlayerMove : MonoBehaviour
         if (curTime <= 0)
         {
             // 'Z' 키를 사용해 공격
-            if (Input.GetKey(KeyCode.X))
+            if (Input.GetKey(KeyCode.X) && isDash == false)
             {
                 // 땅에 있을 때 공격하면 멈춤
                 if(isGround == true)

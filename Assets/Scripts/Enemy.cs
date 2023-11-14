@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         // Move
-        //rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
+        rigid.velocity = new Vector2(nextMove, rigid.velocity.y); // 조정 필요
 
         // Platform Check
         Vector2 frontVec = new Vector2(rigid.position.x + nextMove * 0.3f, rigid.position.y);
@@ -87,8 +87,6 @@ public class Enemy : MonoBehaviour
             audioSource.Play();
             int dirc = (int)Mathf.Sign(targetPos.x - transform.position.x);
             rigid.AddForce(new Vector2(dirc, 0.5f) * 2, ForceMode2D.Impulse);
-            Debug.Log("Direction: " + dirc);
-            Debug.Log("Force: " + new Vector2(dirc, 0.5f) * 5);
         }
     }
 }
