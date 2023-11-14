@@ -197,8 +197,7 @@ public class PlayerMove : MonoBehaviour
                 {
                     if(collider.tag == "Enemy")
                     {
-                        Vector2 targetPos2 = Player.gameObject.transform.position;
-                        collider.GetComponent<Enemy>().EnemyHit(1, targetPos2);
+                        collider.GetComponent<Enemy>().EnemyHit(1, collider.transform.position);
                     }
                 }
 
@@ -218,9 +217,8 @@ public class PlayerMove : MonoBehaviour
                     {
                         if (collider.tag == "Enemy")
                         {
-                            Vector2 targetPos2 = new Vector2(0, 0);
                             // 두번째 콤보는 데미지를 2로 설정
-                            collider.GetComponent<Enemy>().EnemyHit(2, targetPos2);
+                            collider.GetComponent<Enemy>().EnemyHit(2, collider.transform.position);
                         }
                     }
                     anim.SetTrigger("attack2");
@@ -234,9 +232,8 @@ public class PlayerMove : MonoBehaviour
                     {
                         if (collider.tag == "Enemy")
                         {
-                            Vector2 targetPos2 = new Vector2(0, 0);
                             // 세번째 콤보는 데미지를 3로 설정
-                            collider.GetComponent<Enemy>().EnemyHit(3, targetPos2);
+                            collider.GetComponent<Enemy>().EnemyHit(3, collider.transform.position);
                         }
                     }
                     anim.SetTrigger("attack3");
@@ -288,11 +285,15 @@ public class PlayerMove : MonoBehaviour
         {
             if (dashFilltime >= dashCooltime && Input.GetKeyDown(KeyCode.C) && isMoving == true)
             {
+                // 구르기 시 무적
+                gameObject.layer = 11;
                 anim.SetTrigger("dash");
                 audioSource.clip = audioDash;
                 audioSource.Play();
                 dashFilltime = 0;
                 isDash = true;
+                // 0.4초 동안
+                Invoke("OffDamaged", 0.4f);
             }
         }
 
@@ -311,7 +312,7 @@ public class PlayerMove : MonoBehaviour
             maxSpeed = dashSpeed;
         }
         isDash = false;
-
+        
     }
 
     // 콤보 리셋

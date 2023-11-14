@@ -29,7 +29,7 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         // Move
-        rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
+        //rigid.velocity = new Vector2(nextMove, rigid.velocity.y);
 
         // Platform Check
         Vector2 frontVec = new Vector2(rigid.position.x + nextMove * 0.3f, rigid.position.y);
@@ -65,8 +65,8 @@ public class Enemy : MonoBehaviour
         CancelInvoke();
         Invoke("Think", 3);
     }
-
-    public void EnemyHit(int damage, Vector2 targetPos2)
+    
+    public void EnemyHit(int damage, Vector2 targetPos)
     {
         enemyhealth -= damage;
 
@@ -85,9 +85,10 @@ public class Enemy : MonoBehaviour
             anim.SetTrigger("doDamagedBoar");
             audioSource.clip = audioBoar;
             audioSource.Play();
-            int dirc = transform.position.x - targetPos2.x > 0 ? 1 : -1;
-            rigid.AddForce(new Vector2(dirc, 0.5f) * 5, ForceMode2D.Impulse);            
+            int dirc = (int)Mathf.Sign(targetPos.x - transform.position.x);
+            rigid.AddForce(new Vector2(dirc, 0.5f) * 2, ForceMode2D.Impulse);
+            Debug.Log("Direction: " + dirc);
+            Debug.Log("Force: " + new Vector2(dirc, 0.5f) * 5);
         }
     }
-
 }
