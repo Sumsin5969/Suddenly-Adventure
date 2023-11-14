@@ -21,6 +21,10 @@ public class GameStart : MonoBehaviour
         fadeImage.CrossFadeAlpha(1.0f, fadeDuration, false);
         StartCoroutine(LoadSceneAfterFade(sceneName));
     }
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
     private IEnumerator LoadSceneAfterFade(string sceneName)
     {
         // 페이딩 시간만큼 대기
