@@ -183,7 +183,7 @@ public class PlayerMove : MonoBehaviour
         if (curTime <= 0)
         {
             // 'Z' 키를 사용해 공격
-            if (Input.GetKey(KeyCode.X) && isDash == false)
+            if (Input.GetKey(KeyCode.X))
             {
                 // 땅에 있을 때 공격하면 멈춤
                 if(isGround == true)
@@ -293,6 +293,7 @@ public class PlayerMove : MonoBehaviour
                 audioSource.Play();
                 dashFilltime = 0;
                 isDash = true;
+
                 // 0.4초 동안
                 Invoke("OffDamaged", 0.4f);
             }

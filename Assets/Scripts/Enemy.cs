@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.Burst.CompilerServices;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class Enemy : MonoBehaviour
 {
@@ -29,7 +30,7 @@ public class Enemy : MonoBehaviour
     void FixedUpdate()
     {
         // Move
-        rigid.velocity = new Vector2(nextMove, rigid.velocity.y); // 조정 필요
+        // rigid.velocity = new Vector2(nextMove, rigid.velocity.y); // 조정 필요
 
         // Platform Check
         Vector2 frontVec = new Vector2(rigid.position.x + nextMove * 0.3f, rigid.position.y);
@@ -85,8 +86,16 @@ public class Enemy : MonoBehaviour
             anim.SetTrigger("doDamagedBoar");
             audioSource.clip = audioBoar;
             audioSource.Play();
-            int dirc = (int)Mathf.Sign(targetPos.x - transform.position.x);
-            rigid.AddForce(new Vector2(dirc, 0.5f) * 2, ForceMode2D.Impulse);
+            int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
+            rigid.AddForce(new Vector2(0, 0.5f) * 5, ForceMode2D.Impulse);
+        }
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.tag == "Player")
+        {
+            EnemyHit(1, collision.transform.position);
         }
     }
 }
