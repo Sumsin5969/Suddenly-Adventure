@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Runtime.CompilerServices;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMove : MonoBehaviour
 {
@@ -376,6 +377,11 @@ public class PlayerMove : MonoBehaviour
             gameManager.PrevStage();
             // Sound
             PlaySound("FINISH");
+        }
+        else if (collision.gameObject.tag == "ScenePotal")
+        {
+            PlaySound("FINISH");
+            SceneManager.LoadScene("Dungeon");
         }
     }
     private void OnDamaged(Vector2 targetPos) // 피격시 설정
