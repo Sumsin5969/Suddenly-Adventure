@@ -9,6 +9,7 @@ public class PauseMenu : MonoBehaviour
     public static PauseMenu Instance;
     public bool IsPaused = false;
     public GameObject pauseMenuCanvas;
+    public GameObject BGM;
     
     void Start()
     {
@@ -31,6 +32,9 @@ public class PauseMenu : MonoBehaviour
     }
     public void Resume()
     {
+        // BGM 오브젝트에서 AudioSource 컴포넌트를 가져옴
+        AudioSource audioSource = BGM.GetComponent<AudioSource>();
+        audioSource.volume = Mathf.Clamp01(audioSource.volume * 2.0f);
         pauseMenuCanvas.SetActive(false);
         Time.timeScale = 1f;
         IsPaused = false;
@@ -38,6 +42,9 @@ public class PauseMenu : MonoBehaviour
 
     public void Pause()
     {
+        // BGM 오브젝트에서 AudioSource 컴포넌트를 가져옴
+        AudioSource audioSource = BGM.GetComponent<AudioSource>();
+        audioSource.volume = Mathf.Clamp01(audioSource.volume * 0.5f);
         pauseMenuCanvas.SetActive(true);
         Time.timeScale = 0f;
         IsPaused = true;
