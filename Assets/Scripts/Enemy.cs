@@ -13,8 +13,9 @@ public class Enemy : MonoBehaviour
     public AudioSource audioSource;
     public AudioClip audioBoar;
     public AudioClip audioBoarDie;
-    public int nextMove;
     public int enemyhealth;
+    public float speed = 2;
+    bool isLeft = true;
 
     void Awake()
     {
@@ -23,57 +24,21 @@ public class Enemy : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
         audioSource = GetComponent<AudioSource>();
-        Invoke("Think", 3);
     }
-
 
     void FixedUpdate()
     {
-        // Move
-        // rigid.velocity = new Vector2(nextMove, rigid.velocity.y); // 조정 필요
-
-        // Platform Check
-        Vector2 frontVec = new Vector2(rigid.position.x + nextMove * 0.3f, rigid.position.y);
-        Debug.DrawRay(frontVec, Vector3.down, new Color(0, 1, 0));
-        RaycastHit2D rayHit = Physics2D.Raycast(frontVec, Vector3.down, 1, LayerMask.GetMask("Platform"));
-        if (rayHit.collider == null)
-            Turn();
+        transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 
-    // 재귀 함수
-    void Think()
-    {
-        // Set Next Active
-        nextMove = Random.Range(-1, 2);
-
-        // Sprite Animation
-        anim.SetInteger("WalkSpeed", nextMove);
-
-        // Flip Sprite
-        if (nextMove != 0)
-            spriteRenderer.flipX = nextMove == 1;
-
-        // Recursive(재귀)
-        float nextThinkTime = Random.Range(1f, 2f);
-        Invoke("Think", nextThinkTime);
-    }
-    
-    void Turn()
-    {
-        nextMove *= -1;
-        spriteRenderer.flipX = nextMove == 1;
-
-        CancelInvoke();
-        Invoke("Think", 3);
-    }
-    
     public void EnemyHit(int damage, Vector2 targetPos)
     {
         enemyhealth -= damage;
 
         if(enemyhealth <= 0) // 적 사망
         {
-            nextMove = 0;
+            //nextMove = 0;
+            speed = 0;
             audioSource.clip = audioBoarDie;
             audioSource.Play();
             spriteRenderer.color = new Color(1, 1, 1, 0.4f);
@@ -85,12 +50,14 @@ public class Enemy : MonoBehaviour
         {
             GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
             Transform playerTransform = playerObject.transform;
-            anim.SetTrigger("doDamagedBoar");
+            anim.SetTrigger("OnDamaged");
             audioSource.clip = audioBoar;
             audioSource.Play();
             int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
             int add = transform.position.x - playerTransform.position.x > 0 ? 1 : -1;
-            rigid.AddForce(new Vector2(add, 0.5f) * 5, ForceMode2D.Impulse);
+            rigid.AddForce(new Vector2(add, 0.5f) * 2, ForceMode2D.Impulse);
+            transform.eulerAngles = new Vector3(0, 0, 0);
+            isLeft = true;
         }
     }
 
@@ -100,5 +67,22 @@ public class Enemy : MonoBehaviour
         {
             EnemyHit(1, collision.transform.position);
         }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Endpoint")
+        { 
+            if (isLeft)
+            {
+                transform.eulerAngles = new Vector3(0, 180, 0);
+                isLeft = false;
+            }
+            else
+            {
+                transform.eulerAngles = new Vector3(0, 0, 0);
+                isLeft = true;
+            }
+        }   
     }
 }

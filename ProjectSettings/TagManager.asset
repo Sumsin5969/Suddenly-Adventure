@@ -11,6 +11,7 @@ TagManager:
   - Finish_back
   - Beam
   - ScenePotal
+  - Endpoint
   layers:
   - Default
   - TransparentFX
