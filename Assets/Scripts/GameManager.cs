@@ -108,4 +108,10 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene(1);
     }
+    
+    public void RestartDungeon()
+    {
+        Time.timeScale = 1;
+        SceneManager.LoadScene("Dungeon");
+    }
 }
