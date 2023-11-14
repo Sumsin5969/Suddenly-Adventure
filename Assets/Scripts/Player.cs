@@ -424,4 +424,5 @@ public class PlayerMove : MonoBehaviour
     {
         rigid.velocity = Vector2.zero;
     }
+
 }

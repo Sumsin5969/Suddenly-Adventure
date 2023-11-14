@@ -83,11 +83,14 @@ public class Enemy : MonoBehaviour
         }
         else // 적 피격
         {
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            Transform playerTransform = playerObject.transform;
             anim.SetTrigger("doDamagedBoar");
             audioSource.clip = audioBoar;
             audioSource.Play();
             int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
-            rigid.AddForce(new Vector2(0, 0.5f) * 5, ForceMode2D.Impulse);
+            int add = transform.position.x - playerTransform.position.x > 0 ? 1 : -1;
+            rigid.AddForce(new Vector2(add, 0.5f) * 5, ForceMode2D.Impulse);
         }
     }
 
