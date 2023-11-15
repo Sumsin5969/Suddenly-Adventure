@@ -198,7 +198,7 @@ public class PlayerMove : MonoBehaviour
                 {
                     if(collider.tag == "Enemy")
                     {
-                        collider.GetComponent<Enemy>().EnemyHit(1, collider.transform.position);
+                        collider.GetComponent<Enemy>().EnemyHit(1);
                     }
                 }
 
@@ -219,7 +219,7 @@ public class PlayerMove : MonoBehaviour
                         if (collider.tag == "Enemy")
                         {
                             // 두번째 콤보는 데미지를 2로 설정
-                            collider.GetComponent<Enemy>().EnemyHit(2, collider.transform.position);
+                            collider.GetComponent<Enemy>().EnemyHit(2);
                         }
                     }
                     anim.SetTrigger("attack2");
@@ -234,7 +234,7 @@ public class PlayerMove : MonoBehaviour
                         if (collider.tag == "Enemy")
                         {
                             // 세번째 콤보는 데미지를 3로 설정
-                            collider.GetComponent<Enemy>().EnemyHit(3, collider.transform.position);
+                            collider.GetComponent<Enemy>().EnemyHit(3);
                         }
                     }
                     anim.SetTrigger("attack3");

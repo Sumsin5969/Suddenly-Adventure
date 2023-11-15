@@ -41547,7 +41547,7 @@ MonoBehaviour:
   audioSource: {fileID: 0}
   audioBoar: {fileID: 8300000, guid: 7e9ee6dc04a5d40d1a5dfc4beb9865e7, type: 3}
   audioBoarDie: {fileID: 8300000, guid: 84e427d6b66ab4066b6a4dcd0ce819ee, type: 3}
-  enemyhealth: 3
+  enemyhealth: 10
   speed: 1.5
 --- !u!61 &1607034681
 BoxCollider2D:
@@ -41631,7 +41631,7 @@ Animator:
   m_GameObject: {fileID: 1607034677}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 8962863744771689740, guid: bfc057dfb0d267548ae2b14f54ea2a03, type: 3}
+  m_Controller: {fileID: 9100000, guid: 9d5c2dbf3cf5ddb439af95cc7ff45f64, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -44144,7 +44144,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4341196740765946990, guid: 0c70849579b046d48b362c31629cc668, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 4387156528601556809, guid: 0c70849579b046d48b362c31629cc668, type: 3}

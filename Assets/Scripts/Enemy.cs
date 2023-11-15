@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     public int enemyhealth;
     public float speed = 2;
     bool isLeft = true;
+    bool isHit = false;
 
     void Awake()
     {
@@ -31,7 +32,7 @@ public class Enemy : MonoBehaviour
         transform.Translate(Vector2.left * speed * Time.deltaTime);
     }
 
-    public void EnemyHit(int damage, Vector2 targetPos)
+    public void EnemyHit(int damage)
     {
         enemyhealth -= damage;
 
@@ -53,11 +54,16 @@ public class Enemy : MonoBehaviour
             anim.SetTrigger("OnDamaged");
             audioSource.clip = audioBoar;
             audioSource.Play();
-            int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
             int add = transform.position.x - playerTransform.position.x > 0 ? 1 : -1;
             rigid.AddForce(new Vector2(add, 0.5f) * 2, ForceMode2D.Impulse);
             transform.eulerAngles = new Vector3(0, 0, 0);
             isLeft = true;
+            isHit = true;
+            if(isHit)
+            {
+                speed = 3;
+                anim.SetTrigger("isHit");
+            }
         }
     }
 
@@ -65,7 +71,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            EnemyHit(1, collision.transform.position);
+            EnemyHit(1);
         }
     }
 
