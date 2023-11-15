@@ -6,6 +6,7 @@ using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance;
     public int totalPoint;
     public int stagePoint;
     public int stageIndex;
@@ -18,6 +19,11 @@ public class GameManager : MonoBehaviour
     public Text UIStage;
     public GameObject UIRestartBtn;
 
+    void Start()
+    {
+        Instance = this;
+        DontDestroyOnLoad(gameObject);
+    }
     void Update() // 점수 업데이트
     {
         UIPoint.text = (totalPoint + stagePoint).ToString();
@@ -38,7 +44,7 @@ public class GameManager : MonoBehaviour
     public void NextStage()
     {
         // 스테이지 바꾸기
-        if (stageIndex < Stages.Length-1)
+        if (stageIndex < Stages.Length - 1)
         {
             Stages[stageIndex].SetActive(false);
             stageIndex++;
@@ -47,7 +53,8 @@ public class GameManager : MonoBehaviour
 
             UIStage.text = "STAGE " + (stageIndex + 1);
         }
-        else { // 게임 클리어시
+        else
+        { // 게임 클리어시
             // 플레이어 컨트롤 잠금
             Time.timeScale = 0;
             //결과 UI
@@ -108,7 +115,7 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene(1);
     }
-    
+
     public void RestartDungeon()
     {
         Time.timeScale = 1;

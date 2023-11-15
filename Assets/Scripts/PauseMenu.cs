@@ -10,11 +10,16 @@ public class PauseMenu : MonoBehaviour
     public bool IsPaused = false;
     public GameObject pauseMenuCanvas;
     public GameObject BGM;
-    
+
     void Start()
     {
         Instance = this;
         pauseMenuCanvas.SetActive(false);
+        // BGM이 할당되어 있지 않은 경우에 대한 예외 처리
+        if (BGM == null)
+        {
+            Debug.LogError("BGM 변수에 할당된 게임 오브젝트가 없습니다. 인스펙터에서 설정해주세요.");
+        }
     }
     void Update()
     {

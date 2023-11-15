@@ -6,10 +6,12 @@ using UnityEngine.UI;
 
 public class SceneFader : MonoBehaviour
 {
+    public static SceneFader Instance;
     public Image fadeImage;
     private float fadeDuration = 1.0f;
     public void Awake()
     {
+        Instance = this;
         DontDestroyOnLoad(gameObject);
         StartCoroutine(FadeIn());
     }
