@@ -11,6 +11,7 @@ public class Boss1 : StateMachineBehaviour
     Rigidbody2D rb;
     boss2 boss;
     public float attackRange;
+    public float attackRange2;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -26,9 +27,15 @@ public class Boss1 : StateMachineBehaviour
         Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
         rb.MovePosition(newPos);
 
-        if (Vector2.Distance(player.position, rb.position) <= attackRange)
+        // attackRange 안에 들어오면 && attackRange2 보다 밖이면 공격1    
+        if (Vector2.Distance(player.position, rb.position) <= attackRange && Vector2.Distance(player.position, rb.position) > attackRange2)
         {
             animator.SetTrigger("isAttack");
+        }
+        // attackRange2 안에 들어오면 공격2
+        if (Vector2.Distance(player.position, rb.position) <= attackRange2)
+        {
+            animator.SetTrigger("isAttack2");
         }
     }
 }

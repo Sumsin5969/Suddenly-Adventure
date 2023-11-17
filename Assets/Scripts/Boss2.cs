@@ -38,9 +38,7 @@ public class boss2 : MonoBehaviour
         enemyhealth -= damage;
 
         if (enemyhealth <= 0) // 적 사망
-        {
-            //nextMove = 0;
-        
+        {        
             spriteRenderer.color = new Color(1, 1, 1, 0.4f);
             spriteRenderer.flipY = true;
             boxCollider.enabled = false;

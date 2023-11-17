@@ -25,6 +25,5 @@ public class Boss_Attack : MonoBehaviour
         {
             colInfo.GetComponent<PlayerMove>().OnDamaged(colInfo.transform.position);
         }
-
     }
 }
