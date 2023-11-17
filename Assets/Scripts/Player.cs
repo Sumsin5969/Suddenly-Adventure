@@ -200,6 +200,10 @@ public class PlayerMove : MonoBehaviour
                     {
                         collider.GetComponent<Enemy>().EnemyHit(1);
                     }
+                    else if(collider.tag == "Boss1")
+                    {
+                        collider.GetComponent<boss2>().EnemyHit(1);
+                    }
                 }
 
                 curTime = coolTime;
@@ -385,7 +389,7 @@ public class PlayerMove : MonoBehaviour
             SceneManager.LoadScene("Dungeon");
         }
     }
-    private void OnDamaged(Vector2 targetPos) // 피격시 설정
+    public void OnDamaged(Vector2 targetPos) // 피격시 설정
     {
         // 체력 감소
         gameManager.HealthDown();

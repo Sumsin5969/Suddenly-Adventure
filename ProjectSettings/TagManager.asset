@@ -12,6 +12,7 @@ TagManager:
   - Beam
   - ScenePotal
   - Endpoint
+  - Boss1
   layers:
   - Default
   - TransparentFX

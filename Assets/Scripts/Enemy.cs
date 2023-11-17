@@ -54,8 +54,10 @@ public class Enemy : MonoBehaviour
             anim.SetTrigger("OnDamaged");
             audioSource.clip = audioBoar;
             audioSource.Play();
+
             int add = transform.position.x - playerTransform.position.x > 0 ? 1 : -1;
             rigid.AddForce(new Vector2(add, 0.5f) * 2, ForceMode2D.Impulse);
+
             transform.eulerAngles = new Vector3(0, 0, 0);
             isLeft = true;
             isHit = true;
