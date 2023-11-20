@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class VideoOption : MonoBehaviour
 {
+    public static VideoOption Instance;
     FullScreenMode screenMode;
     public Dropdown resolutionDropdown;
     public Toggle fullscreenBtn;
@@ -41,12 +42,13 @@ public class VideoOption : MonoBehaviour
     {
         screenMode = isFull ? FullScreenMode.FullScreenWindow : FullScreenMode.Windowed;
     }
-    public void OkBtnClick()
+    public void ApplyBtnClick()
     {
         Screen.SetResolution(resolutions[resolutionNum].width,resolutions[resolutionNum].height,screenMode);
     }
     void Start()
     {
+        Instance = this;
         InitUI();
     }
 

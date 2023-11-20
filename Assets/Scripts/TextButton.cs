@@ -35,12 +35,19 @@ public class TextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             resumeClick.callback.AddListener((data) => { OnResumeClickDelegate(); });
         }
 
-        /*EventTrigger.Entry optionClick = new EventTrigger.Entry();
-        exitClick.eventID = EventTriggerType.PointerClick;
+        EventTrigger.Entry optionClick = new EventTrigger.Entry();
+        optionClick.eventID = EventTriggerType.PointerClick;
         if (this.gameObject.name == "Option")
         {
-            exitClick.callback.AddListener((data) => { OnOptionClickDelegate(); });
-        }*/
+            optionClick.callback.AddListener((data) => { OnOptionClickDelegate(); });
+        }
+
+        EventTrigger.Entry applyClick = new EventTrigger.Entry();
+        applyClick.eventID = EventTriggerType.PointerClick;
+        if (this.gameObject.name == "Apply")
+        {
+            applyClick.callback.AddListener((data) => { OnApplyClickDelegate(); });
+        }
 
         EventTrigger.Entry exitClick = new EventTrigger.Entry();
         exitClick.eventID = EventTriggerType.PointerClick;
@@ -78,12 +85,18 @@ public class TextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
         PauseMenu.Instance.Resume();
         buttonText.fontSize = 80;
     }
-    /*public void OnOptionClickDelegate()
+    public void OnOptionClickDelegate()
     {
         // Option 텍스트가 클릭되었을 때 수행할 동작
         PauseMenu.Instance.Option();
         buttonText.fontSize = 80;
-    }*/
+    }
+    public void OnApplyClickDelegate()
+    {
+        // Apply 텍스트가 클릭되었을 때 수행할 동작
+        VideoOption.Instance.ApplyBtnClick();
+        buttonText.fontSize = 80;
+    }
     public void OnExitClickDelegate()
     {
         // Exit 텍스트가 클릭되었을 때 수행할 동작
@@ -107,6 +120,14 @@ public class TextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnResumeClick(PointerEventData eventData)
     {
         OnResumeClickDelegate();
+    }
+    public void OnOptionClick(PointerEventData eventData)
+    {
+        OnOptionClickDelegate();
+    }
+    public void OnApplyClick(PointerEventData eventData)
+    {
+        OnApplyClickDelegate();
     }
     public void OnExitClick(PointerEventData eventData)
     {

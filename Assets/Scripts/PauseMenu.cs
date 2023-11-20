@@ -8,7 +8,9 @@ public class PauseMenu : MonoBehaviour
 {
     public static PauseMenu Instance;
     public bool IsPaused = false;
+    public bool inOptionMenu = false;
     public GameObject pauseMenuCanvas;
+    public GameObject optionCanvas;
     public GameObject BGM;
 
     void Start()
@@ -44,10 +46,27 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         IsPaused = false;
     }
-    /*public void Option()
+    public void Option()
     {
-
-    }*/
+        if (inOptionMenu)
+        {
+            pauseMenuCanvas.SetActive(false);
+            optionCanvas.SetActive(true);
+            inOptionMenu = true;
+        }
+        else if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            pauseMenuCanvas.SetActive(true);
+            optionCanvas.SetActive(false);
+            inOptionMenu = false;
+        }
+    }
+    public void Apply()
+    {
+        pauseMenuCanvas.SetActive(true);
+        optionCanvas.SetActive(false);
+        inOptionMenu = false;
+    }
     public void Pause()
     {
         // BGM 오브젝트에서 AudioSource 컴포넌트를 가져옴
