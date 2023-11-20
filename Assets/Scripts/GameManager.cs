@@ -26,7 +26,8 @@ public class GameManager : MonoBehaviour
     }
     void Update() // 점수 업데이트
     {
-        UIPoint.text = (totalPoint + stagePoint).ToString();
+        if (UIPoint != null)
+            UIPoint.text = (totalPoint + stagePoint).ToString();
     }
 
     public void PrevStage()

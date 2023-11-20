@@ -11,6 +11,7 @@ public class VideoOption : MonoBehaviour
     public Toggle fullscreenBtn;
     List<Resolution> resolutions = new List<Resolution>();
     public int resolutionNum;
+    // 사용자 컴퓨터에서 받아오는 드롭다운 메뉴 생성
     void InitUI()
     {
         for (int i = 0; i < Screen.resolutions.Length; i++)
@@ -23,7 +24,7 @@ public class VideoOption : MonoBehaviour
         foreach (Resolution item in resolutions)
         {
             Dropdown.OptionData option = new Dropdown.OptionData();
-            option.text = item.width + "x" + item.height + " " + item.refreshRate + "hz";
+            option.text = item.width + "x" + item.height + " " + item.refreshRateRatio + "hz";
             resolutionDropdown.options.Add(option);
 
             if(item.width == Screen.width && item.height == Screen.height)

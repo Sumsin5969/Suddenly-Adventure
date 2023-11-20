@@ -17,6 +17,7 @@ public class PauseMenu : MonoBehaviour
     {
         Instance = this;
         pauseMenuCanvas.SetActive(false);
+        optionCanvas.SetActive(false);
         // BGM이 할당되어 있지 않은 경우에 대한 예외 처리
         if (BGM == null)
         {
@@ -27,13 +28,19 @@ public class PauseMenu : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (IsPaused == true)
+            if (IsPaused == true && inOptionMenu == false)
             {
                 Resume();
             }
-            else
+            else if (IsPaused == false && inOptionMenu == false)
             {
                 Pause();
+            }
+            if (inOptionMenu == true)
+            {
+                pauseMenuCanvas.SetActive(true);
+                optionCanvas.SetActive(false);
+                inOptionMenu = false;
             }
         }
     }
@@ -48,20 +55,15 @@ public class PauseMenu : MonoBehaviour
     }
     public void Option()
     {
-        if (inOptionMenu)
+        Debug.Log("Option");
+        if (inOptionMenu == false)
         {
             pauseMenuCanvas.SetActive(false);
             optionCanvas.SetActive(true);
             inOptionMenu = true;
         }
-        else if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            pauseMenuCanvas.SetActive(true);
-            optionCanvas.SetActive(false);
-            inOptionMenu = false;
-        }
     }
-    public void Apply()
+    public void CloseOption()
     {
         pauseMenuCanvas.SetActive(true);
         optionCanvas.SetActive(false);
