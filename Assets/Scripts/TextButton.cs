@@ -35,6 +35,13 @@ public class TextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
             resumeClick.callback.AddListener((data) => { OnResumeClickDelegate(); });
         }
 
+        /*EventTrigger.Entry optionClick = new EventTrigger.Entry();
+        exitClick.eventID = EventTriggerType.PointerClick;
+        if (this.gameObject.name == "Option")
+        {
+            exitClick.callback.AddListener((data) => { OnOptionClickDelegate(); });
+        }*/
+
         EventTrigger.Entry exitClick = new EventTrigger.Entry();
         exitClick.eventID = EventTriggerType.PointerClick;
         if (this.gameObject.name == "Exit")
@@ -68,14 +75,18 @@ public class TextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     public void OnResumeClickDelegate()
     {
         // Resume 텍스트가 클릭되었을 때 수행할 동작
-        Debug.Log("Resume 이벤트 발생");
         PauseMenu.Instance.Resume();
         buttonText.fontSize = 80;
     }
+    /*public void OnOptionClickDelegate()
+    {
+        // Option 텍스트가 클릭되었을 때 수행할 동작
+        PauseMenu.Instance.Option();
+        buttonText.fontSize = 80;
+    }*/
     public void OnExitClickDelegate()
     {
         // Exit 텍스트가 클릭되었을 때 수행할 동작
-        Debug.Log("Exit 이벤트 발생");
         PauseMenu.Instance.Exit();
         buttonText.fontSize = 80;
     }

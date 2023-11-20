@@ -44,7 +44,10 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1f;
         IsPaused = false;
     }
+    /*public void Option()
+    {
 
+    }*/
     public void Pause()
     {
         // BGM 오브젝트에서 AudioSource 컴포넌트를 가져옴
