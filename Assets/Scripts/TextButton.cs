@@ -1,4 +1,12 @@
-using System.Collections;
+// 버리는 코드(PauseMenuButtons 스크립트로 대체)
+// 필요시 PauseMenuButtons 참고할 것
+
+
+
+
+
+
+/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -137,4 +145,4 @@ public class TextButton : MonoBehaviour, IPointerEnterHandler, IPointerExitHandl
     {
         // 클릭 이벤트가 처리되면 이곳에 추가 로직을 작성하세요.
     }
-}
+}*/

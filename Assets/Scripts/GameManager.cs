@@ -21,11 +21,21 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
-        Instance = this;
-        DontDestroyOnLoad(gameObject);
+        if (Instance == null)
+        {
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            // 이미 인스턴스가 존재하면 현재 오브젝트를 파괴
+            Destroy(gameObject);
+        }
     }
     void Update() // 점수 업데이트
     {
+        // 수정자: 정성헌 수정일: 11/21
+        // 무한불러오기로 콘솔창이 시끄러워서 조건문추가함
         if (UIPoint != null)
             UIPoint.text = (totalPoint + stagePoint).ToString();
     }

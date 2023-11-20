@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class PauseMenuKeeper : MonoBehaviour
 {
-    private GameObject PauseMenu;
     void Start()
     {
         DontDestroyOnLoad(gameObject);

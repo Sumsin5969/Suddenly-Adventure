@@ -10,7 +10,7 @@ public class PauseMenuButtons : MonoBehaviour
     public TextMeshProUGUI[] buttons;
     void Start()
     {
-        // 모든 버튼에 대해 마우스 진입 시 이벤트 핸들러 등록
+        // 모든 버튼에 대해 마우스 진입 및 나갈 시 이벤트 핸들러 등록
         foreach (TextMeshProUGUI button in buttons)
         {
             button.gameObject.AddComponent<EventTrigger>();
@@ -39,6 +39,8 @@ public class PauseMenuButtons : MonoBehaviour
     {
         button.fontSize = 60;
     }
+    // 클릭 이벤트 추가하려면 아래 복붙해서 메서드만들고 위에 클릭이벤트리스너 추가하고
+    // Suddenly씬 Pause메뉴 캔버스에 버튼 배열 하나 더 만들어서 참조할 tmp주가하면됨
     void OnResumeClick()
     {
         PauseMenu.Instance.Resume();
