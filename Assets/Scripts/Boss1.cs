@@ -53,13 +53,5 @@ public class Boss1 : StateMachineBehaviour
         animator.ResetTrigger("isAttack");
         animator.ResetTrigger("isAttack2");
     }
-
-
-    void OnDrawGizmos()
-    {
-        // moveRange를 기반으로 Scene 뷰에 원을 그립니다.
-        Gizmos.color = Color.yellow; // 색상 설정
-        Gizmos.DrawWireSphere(rb.position, moveRange);
-    }
 }
 
