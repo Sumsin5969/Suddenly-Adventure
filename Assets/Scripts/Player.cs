@@ -202,7 +202,7 @@ public class PlayerMove : MonoBehaviour
                     }
                     else if(collider.tag == "Boss1")
                     {
-                        collider.GetComponent<boss2>().EnemyHit(1);
+                        collider.GetComponent<Boss1_Health>().Boss1Hit(1);
                     }
                 }
 
