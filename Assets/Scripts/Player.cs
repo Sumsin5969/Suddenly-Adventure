@@ -125,7 +125,7 @@ public class PlayerMove : MonoBehaviour
                 if(rayHit.distance < 1.0f){
                     anim.SetBool("isJumping", false);
                     anim.SetBool("isFalling", false);
-                    Debug.Log(rayHit.collider.name);
+                    // Debug.Log(rayHit.collider.name);
                 }
             }
             else

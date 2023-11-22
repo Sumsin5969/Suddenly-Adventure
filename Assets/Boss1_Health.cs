@@ -19,6 +19,7 @@ public class Boss1_Health : MonoBehaviour
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
     public void Boss1Hit(int damage)
     {
         enemyhealth -= damage;
@@ -33,9 +34,15 @@ public class Boss1_Health : MonoBehaviour
         }
         else // 적 피격
         {
-            anim.SetTrigger("Damaged");
+            // anim.SetTrigger("Damaged");
+            spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+            Invoke("OffDamaged", 0.5f);
         }
     }
 
+    public void OffDamaged()
+    {
+        spriteRenderer.color = new Color(1, 1, 1, 1);
+    }
    
 }
