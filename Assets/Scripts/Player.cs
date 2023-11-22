@@ -386,7 +386,7 @@ public class PlayerMove : MonoBehaviour
         else if (collision.gameObject.tag == "ScenePotal")
         {
             PlaySound("FINISH");
-            SceneManager.LoadScene("Dungeon");
+            LoadNextScene();
         }
     }
     public void OnDamaged(Vector2 targetPos) // 피격시 설정
@@ -427,6 +427,18 @@ public class PlayerMove : MonoBehaviour
     public void VelocityZero()
     {
         rigid.velocity = Vector2.zero;
+    }
+
+    public void LoadNextScene()
+    {
+        // 현재 씬의 빌드 인덱스를 가져옴
+        int currentSceneBuildIndex = SceneManager.GetActiveScene().buildIndex;
+
+        // 빌드 순서에 있는 다음 씬으로 이동
+        int nextSceneBuildIndex = (currentSceneBuildIndex + 1) % SceneManager.sceneCountInBuildSettings;
+
+        // 던전 씬으로 이동
+        SceneManager.LoadScene(nextSceneBuildIndex);
     }
 
 }

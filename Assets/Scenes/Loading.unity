@@ -728,7 +728,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: be6bfa05b4e6dcf4f96d71af55e21d5c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SceneToLoad: Suddenly
+  SceneToLoad: "\uAE4A\uC740 \uC0B0 \uC18D"
   loadingIcon: {fileID: 1495011581}
   completionText: {fileID: 1009926464}
   minAlpha: 0.2

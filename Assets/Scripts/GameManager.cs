@@ -102,20 +102,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            // 플레이어를 땅 위로 이동
-            if (health > 1)
-                PlayerReposition();
-
-            // 떨어지면 체력감소
-            HealthDown();
-        }
-    }
-
-    void PlayerReposition()
+    public void PlayerReposition()
     {
         player.transform.position = new Vector3(-6, 4, -1);
         player.VelocityZero();
@@ -130,6 +117,6 @@ public class GameManager : MonoBehaviour
     public void RestartDungeon()
     {
         Time.timeScale = 1;
-        SceneManager.LoadScene("Dungeon");
+        SceneManager.LoadScene("던전");
     }
 }
