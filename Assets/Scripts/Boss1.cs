@@ -15,7 +15,6 @@ public class Boss1 : StateMachineBehaviour
     public float attackRange;
     public float attackRange2;
 
-
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
@@ -31,7 +30,7 @@ public class Boss1 : StateMachineBehaviour
         rb.MovePosition(newPos);
 
         // attackRange 안에 들어오면 && attackRange2 보다 밖이면 공격1    
-        if (Vector2.Distance(player.position, rb.position) <= attackRange && Vector2.Distance(player.position, rb.position) > attackRange2)
+        if (Vector2.Distance( player.position, rb.position) <= attackRange && Vector2.Distance(player.position, rb.position) > attackRange2)
         {
             animator.SetTrigger("isAttack");
         }

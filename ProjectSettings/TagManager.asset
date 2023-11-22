@@ -13,6 +13,7 @@ TagManager:
   - ScenePotal
   - Endpoint
   - Boss1
+  - Boss1_Death
   layers:
   - Default
   - TransparentFX

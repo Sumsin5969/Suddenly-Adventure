@@ -27,10 +27,15 @@ public class Boss1_Health : MonoBehaviour
         {
             anim.SetTrigger("Die");
             gameObject.layer = 11;
+
+            BoxCollider2D collider = GetComponent<BoxCollider2D>();
+            collider.tag = "Boss1_Death";
         }
         else // 적 피격
         {
             anim.SetTrigger("Damaged");
         }
     }
+
+   
 }
