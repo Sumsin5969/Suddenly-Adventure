@@ -27,8 +27,9 @@ public class Boss1 : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Vector2.Distance(rb.position, player.position) <= moveRange)
+        if (Vector2.Distance(player.position, rb.position) <= moveRange)
         {
+            anim.SetBool("isWalk", true);
             boss.LookPlayer();
             Vector2 target = new Vector2(player.position.x, rb.position.y);
             Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
