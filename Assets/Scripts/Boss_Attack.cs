@@ -12,6 +12,14 @@ public class Boss_Attack : MonoBehaviour
     public float attackRange = 1f;
     public LayerMask attackMask;
 
+    public AudioClip audioBoss1Attack1;
+    AudioSource audioSource;
+
+    private void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void Attack()
     {
         Vector3 pos = transform.position;
@@ -19,6 +27,9 @@ public class Boss_Attack : MonoBehaviour
         pos += transform.up * attackOffset.y;
 
         Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
+
+        audioSource.clip = audioBoss1Attack1;
+        audioSource.Play();
 
         // 공격 범위 내에서 내려찍는 타이밍에 피격 함수 실행
         if (gameObject.layer != 14 && colInfo != null)
