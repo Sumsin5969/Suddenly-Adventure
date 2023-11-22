@@ -1,5 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEditor;
 using UnityEngine;
 
 // 보스 이동 기능
@@ -12,6 +14,7 @@ public class Boss1 : StateMachineBehaviour
     boss2 boss;
     public float attackRange;
     public float attackRange2;
+
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
