@@ -58,8 +58,8 @@ public class Boss1 : StateMachineBehaviour
     void OnDrawGizmos()
     {
         // moveRange를 기반으로 Scene 뷰에 원을 그립니다.
-        Gizmos.color = Color.red; // 색상 설정
-        Gizmos.DrawWireSphere(player.position, moveRange);
+        Gizmos.color = Color.yellow; // 색상 설정
+        Gizmos.DrawWireSphere(rb.position, moveRange);
     }
 }
 
