@@ -12,25 +12,32 @@ public class Boss1 : StateMachineBehaviour
     Transform player;
     Rigidbody2D rb;
     boss2 boss;
+    Animator anim;
     public float attackRange;
     public float attackRange2;
+    public float moveRange;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         player = GameObject.FindGameObjectWithTag("Player").transform;
         rb = animator.GetComponent<Rigidbody2D>();
         boss = animator.GetComponent<boss2>();
+        anim = animator.GetComponent<Animator>();
     }
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        boss.LookPlayer();
-        Vector2 target = new Vector2(player.position.x, rb.position.y);
-        Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
-        rb.MovePosition(newPos);
-
+        if (Vector2.Distance(rb.position, player.position) <= moveRange)
+        {
+            anim.SetBool("isWalking", true);
+            boss.LookPlayer();
+            Vector2 target = new Vector2(player.position.x, rb.position.y);
+            Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
+            rb.MovePosition(newPos);
+        }
+        
         // attackRange 안에 들어오면 && attackRange2 보다 밖이면 공격1    
-        if (Vector2.Distance( player.position, rb.position) <= attackRange && Vector2.Distance(player.position, rb.position) > attackRange2)
+        if (Vector2.Distance(player.position, rb.position) <= attackRange && Vector2.Distance(player.position, rb.position) > attackRange2)
         {
             animator.SetTrigger("isAttack");
         }
@@ -39,6 +46,20 @@ public class Boss1 : StateMachineBehaviour
         {
             animator.SetTrigger("isAttack2");
         }
+    }
+
+    override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
+    {
+        animator.ResetTrigger("isAttack");
+        animator.ResetTrigger("isAttack2");
+    }
+
+
+    void OnDrawGizmos()
+    {
+        // moveRange를 기반으로 Scene 뷰에 원을 그립니다.
+        Gizmos.color = Color.red; // 색상 설정
+        Gizmos.DrawWireSphere(player.position, moveRange);
     }
 }
 

@@ -26,4 +26,15 @@ public class Boss_Attack : MonoBehaviour
             colInfo.GetComponent<PlayerMove>().OnDamaged(colInfo.transform.position);
         }
     }
+
+    void OnDrawGizmos()
+    {
+        // Attack 함수에서 계산한 오버랩 써클의 범위를 Scene 뷰에 그립니다.
+        Vector3 pos = transform.position;
+        pos += transform.right * attackOffset.x;
+        pos += transform.up * attackOffset.y;
+
+        Gizmos.color = Color.red; // 원하는 색상으로 설정
+        Gizmos.DrawWireSphere(pos, attackRange);
+    }
 }

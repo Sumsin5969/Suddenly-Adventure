@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 // 보스 공격 기능
 public class Boss_Attack2 : MonoBehaviour
@@ -25,5 +26,16 @@ public class Boss_Attack2 : MonoBehaviour
         {
             colInfo.GetComponent<PlayerMove>().OnDamaged(colInfo.transform.position);
         }
+    }
+
+    void OnDrawGizmos()
+    {
+        // Attack 함수에서 계산한 오버랩 써클의 범위를 Scene 뷰에 그립니다.
+        Vector3 pos = transform.position;
+        pos += transform.right * attackOffset2.x;
+        pos += transform.up * attackOffset2.y;
+
+        Gizmos.color = Color.red; // 원하는 색상으로 설정
+        Gizmos.DrawWireSphere(pos, attackRange2);
     }
 }
