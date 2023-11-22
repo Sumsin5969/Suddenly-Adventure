@@ -26,7 +26,7 @@ public class Boss1_Health : MonoBehaviour
         if (enemyhealth <= 0) // 적 사망
         {
             anim.SetTrigger("Die");
-            gameObject.layer = 11;
+            gameObject.layer = 14;
 
             BoxCollider2D collider = GetComponent<BoxCollider2D>();
             collider.tag = "Boss1_Death";

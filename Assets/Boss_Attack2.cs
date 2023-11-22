@@ -21,7 +21,7 @@ public class Boss_Attack2 : MonoBehaviour
         Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange2, attackMask2);
 
         // 공격 범위 내에서 휘두르는 타이밍에 피격 함수 실행
-        if (colInfo != null)
+        if (gameObject.layer != 14 && colInfo != null)
         {
             colInfo.GetComponent<PlayerMove>().OnDamaged(colInfo.transform.position);
         }
