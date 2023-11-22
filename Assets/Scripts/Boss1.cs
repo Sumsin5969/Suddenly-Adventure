@@ -27,14 +27,13 @@ public class Boss1 : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        if (Vector2.Distance(player.position, rb.position) <= moveRange)
+        if (Vector2.Distance(rb.position, player.position) <= moveRange)
         {
             boss.LookPlayer();
             Vector2 target = new Vector2(player.position.x, rb.position.y);
             Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
         }
-
         
         // attackRange 안에 들어오면 && attackRange2 보다 밖이면 공격1    
         if (Vector2.Distance(player.position, rb.position) <= attackRange && Vector2.Distance(player.position, rb.position) > attackRange2)

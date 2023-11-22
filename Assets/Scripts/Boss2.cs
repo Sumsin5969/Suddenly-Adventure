@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-// 보스 Default 기능
+// 보스 회전 기능
 public class boss2 : MonoBehaviour
 {
     public Transform player;

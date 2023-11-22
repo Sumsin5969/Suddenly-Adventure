@@ -38,8 +38,12 @@ public class Boss1_Health : MonoBehaviour
             spriteRenderer.color = new Color(1, 1, 1, 0.4f);
             Invoke("OffDamaged", 0.5f);
         }
-    }
 
+        if (enemyhealth <= 5)
+        {
+            anim.SetBool("isRage", true);
+        }
+    }
     public void OffDamaged()
     {
         spriteRenderer.color = new Color(1, 1, 1, 1);
