@@ -10,8 +10,8 @@ public class Skel_Run : StateMachineBehaviour
     Rigidbody2D rb;
     Skel skel;
     Animator anim;
-    // public float attackRange;
-    // public float moveRange;
+    public float attackRange;
+    public float moveRange;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -23,21 +23,19 @@ public class Skel_Run : StateMachineBehaviour
 
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
-        anim.SetBool("isWalk", true);
-        skel.LookPlayer();
-        Vector2 target = new Vector2(player.position.x, rb.position.y);
-        Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
-        rb.MovePosition(newPos);
-
-       // if (Vector2.Distance(player.position, rb.position) <= moveRange)
-       // {
-            
-       // }
+       if (Vector2.Distance(player.position, rb.position) <= moveRange)
+       {
+            //anim.SetBool("isWalk", true);
+            skel.LookPlayer();
+            Vector2 target = new Vector2(player.position.x, rb.position.y);
+            Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
+            rb.MovePosition(newPos);
+       }
         
-        // if (Vector2.Distance(player.position, rb.position) <= attackRange)
-        // {
-        //     animator.SetTrigger("isAttack");
-        // }
+        if (Vector2.Distance(player.position, rb.position) <= attackRange)
+        {
+            animator.SetTrigger("isAttack");
+        }
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
