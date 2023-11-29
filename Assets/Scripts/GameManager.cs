@@ -102,6 +102,20 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void AllHealthDown(){
+        health = 0;
+        // 모든 Health UI OFF
+        UIhealth[0].color = new Color(1, 0, 0, 0.4f);
+        // 플레이어 죽음
+        player.OnDie();
+
+        //  결과 UI
+        Debug.Log("죽었습니다!");
+        // Retry 버튼 UI
+        UIRestartBtn.SetActive(true);
+
+    }
+
     public void PlayerReposition()
     {
         player.transform.position = new Vector3(-6, 4, -1);

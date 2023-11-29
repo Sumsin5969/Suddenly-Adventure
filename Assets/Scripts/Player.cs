@@ -347,6 +347,11 @@ public class PlayerMove : MonoBehaviour
         {
             OnDamaged(collision.transform.position);
         }
+
+        else if(collision.gameObject.tag == "Spike")
+        {
+            FullDamaged(collision.transform.position);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -439,6 +444,27 @@ public class PlayerMove : MonoBehaviour
 
         // 던전 씬으로 이동
         SceneManager.LoadScene(nextSceneBuildIndex);
+    }
+
+    public void FullDamaged(Vector2 targetPos) // 피격시 설정
+    {
+        // 체력 감소
+        gameManager.AllHealthDown();
+
+        // 레이어를 PlayDameged로 변경
+        gameObject.layer = 11;
+
+        // 피격시 색상 및 투명도 설정
+        spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+
+        // 피격시 밀려남
+        int dirc = transform.position.x - targetPos.x > 0 ? 1 : -1;
+        rigid.AddForce(new Vector2(dirc, 1) * 20, ForceMode2D.Impulse);
+
+        // 애니메이션
+        anim.SetTrigger("doDamaged");
+        PlaySound("DAMAGED"); // Sound
+        Invoke("OffDamaged", 1); // Player 레이어로 돌아가는 시간(무적시간설정)
     }
 
 }

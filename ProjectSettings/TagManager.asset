@@ -14,6 +14,8 @@ TagManager:
   - Endpoint
   - Boss1
   - Boss1_Death
+  - Spike
+  - Save
   layers:
   - Default
   - TransparentFX
@@ -31,7 +33,7 @@ TagManager:
   - Beam
   - Boss1_Death
   - Boss1
-  - 
+  - Spike
   - 
   - 
   - 
