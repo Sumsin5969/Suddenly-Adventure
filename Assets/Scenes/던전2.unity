@@ -1130,7 +1130,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 498469187}
         m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
-        m_MethodName: RestartDungeon
+        m_MethodName: ReSpawn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -86409,6 +86409,8 @@ MonoBehaviour:
   boxSize: {x: 1.5, y: 1.25, z: 0}
   SwordBeam: {fileID: 0}
   Player: {fileID: 0}
+  SavePoint: {fileID: 0}
+  ClassicPoint: {x: -6, y: 4, z: -1}
 --- !u!4 &915556046
 Transform:
   m_ObjectHideFlags: 0
@@ -86418,7 +86420,7 @@ Transform:
   m_GameObject: {fileID: 915556044}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -6, y: -16.04, z: -1}
+  m_LocalPosition: {x: -4.71, y: 4.16, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -87718,9 +87720,9 @@ GameObject:
   - component: {fileID: 1084267950}
   - component: {fileID: 1084267952}
   - component: {fileID: 1084267951}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: SavePoint
-  m_TagString: Untagged
+  m_TagString: SavePoint
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -87769,7 +87771,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

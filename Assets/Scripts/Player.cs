@@ -47,7 +47,14 @@ public class PlayerMove : MonoBehaviour
     public Vector3 boxSize;
     public GameObject SwordBeam;
     public GameObject Player;
-
+    public Transform SavePoint;
+    public Vector3 ClassicPoint = new Vector3(-6, 4, -1);
+    
+    void Classic() // 리스폰 기본값
+    {
+        SavePoint = new GameObject("SavePoint").transform;
+        SavePoint.position = ClassicPoint;
+    }
 
     void Awake()
     {
@@ -354,7 +361,7 @@ public class PlayerMove : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Item")
         {
@@ -393,6 +400,13 @@ public class PlayerMove : MonoBehaviour
             PlaySound("FINISH");
             LoadNextScene();
         }
+
+        else if (collision.gameObject.tag == "SavePoint")
+        {
+            GameObject SavaPointObject = GameObject.FindGameObjectWithTag("SavePoint");
+            SavePoint = SavaPointObject.transform;
+            Debug.Log("세이브 성공");
+        }
     }
     public void OnDamaged(Vector2 targetPos) // 피격시 설정
     {
@@ -429,6 +443,13 @@ public class PlayerMove : MonoBehaviour
         PlaySound("DIE"); // Sound
     }
 
+    public void OnLive() // 플레이어 리스폰으로 살아날 때
+    {
+        spriteRenderer.color = new Color(1, 1, 1, 1.0f);
+        spriteRenderer.flipY = false;
+        capsuleCollider.enabled = true;
+    }
+
     public void VelocityZero()
     {
         rigid.velocity = Vector2.zero;
@@ -446,7 +467,7 @@ public class PlayerMove : MonoBehaviour
         SceneManager.LoadScene(nextSceneBuildIndex);
     }
 
-    public void FullDamaged(Vector2 targetPos) // 피격시 설정
+    public void FullDamaged(Vector2 targetPos) // 즉사
     {
         // 체력 감소
         gameManager.AllHealthDown();

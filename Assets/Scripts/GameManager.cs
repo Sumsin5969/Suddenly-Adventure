@@ -133,4 +133,19 @@ public class GameManager : MonoBehaviour
         Time.timeScale = 1;
         SceneManager.LoadScene("던전");
     }
+
+    public void ReSpawn() // Retry 버튼 기능
+    {
+        health = 3;
+        Time.timeScale = 1;
+        GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+        Transform playertransform = playerObject.transform;
+        playertransform.position = player.SavePoint.position;
+        player.OnLive();
+        UIRestartBtn.SetActive(false); // Retry 버튼 비활성화
+        // 모든 Health UI ON
+        UIhealth[0].color = new Color(1, 1, 1, 1.0f);
+        UIhealth[1].color = new Color(1, 1, 1, 1.0f);
+        UIhealth[2].color = new Color(1, 1, 1, 1.0f);
+    }
 }

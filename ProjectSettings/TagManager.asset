@@ -16,6 +16,7 @@ TagManager:
   - Boss1_Death
   - Spike
   - Save
+  - SavePoint
   layers:
   - Default
   - TransparentFX
