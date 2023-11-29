@@ -48,13 +48,6 @@ public class PlayerMove : MonoBehaviour
     public GameObject SwordBeam;
     public GameObject Player;
     public Transform SavePoint;
-    public Vector3 ClassicPoint = new Vector3(-6, 4, -1);
-    
-    void Classic() // 리스폰 기본값
-    {
-        SavePoint = new GameObject("SavePoint").transform;
-        SavePoint.position = ClassicPoint;
-    }
 
     void Awake()
     {

@@ -17,6 +17,7 @@ TagManager:
   - Spike
   - Save
   - SavePoint
+  - ClassicPoint
   layers:
   - Default
   - TransparentFX
