@@ -31,6 +31,7 @@ public class Boss1_Health : MonoBehaviour
 
             BoxCollider2D collider = GetComponent<BoxCollider2D>();
             collider.tag = "Boss1_Death";
+            Invoke("Potal", 5);
         }
         else // 적 피격
         {
@@ -47,6 +48,16 @@ public class Boss1_Health : MonoBehaviour
     public void OffDamaged()
     {
         spriteRenderer.color = new Color(1, 1, 1, 1);
+    }
+
+    public void Potal() // 보스가 죽으면 그 자리에 포탈을 소환
+    {
+        GameObject scenePotal = GameObject.FindGameObjectWithTag("ScenePotal");
+        Transform scenePotaltransform = scenePotal.transform;
+        GameObject boss1Death = GameObject.FindGameObjectWithTag("Boss1_Death");
+        Transform boss1Deathtransform = boss1Death.transform;
+
+        scenePotaltransform.position = boss1Deathtransform.position;
     }
    
 }

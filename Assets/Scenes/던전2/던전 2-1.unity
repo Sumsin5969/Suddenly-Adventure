@@ -75496,7 +75496,7 @@ GameObject:
   - component: {fileID: 845129339}
   m_Layer: 0
   m_Name: Finish
-  m_TagString: Finish
+  m_TagString: ScenePotal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

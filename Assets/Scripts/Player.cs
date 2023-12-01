@@ -435,7 +435,7 @@ public class PlayerMove : MonoBehaviour
         capsuleCollider.enabled = false;
         rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
         PlaySound("DIE"); // Sound
-        Invoke("TimeStop", 1);
+        TimeStop();
     }
 
     public void OnLive() // 플레이어 리스폰으로 살아날 때
@@ -480,7 +480,7 @@ public class PlayerMove : MonoBehaviour
         // 애니메이션
         anim.SetTrigger("doDamaged");
         PlaySound("DAMAGED"); // Sound
-        Invoke("TimeStop", 1);
+        TimeStop();
     }
 
     public void TimeStop()

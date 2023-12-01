@@ -38,4 +38,13 @@ EditorBuildSettings:
   - enabled: 1
     path: "Assets/Scenes/\uB358\uC8041/\uB358\uC804 1-4.unity"
     guid: 820d858dc784d044785888b72cff65ef
+  - enabled: 1
+    path: "Assets/Scenes/\uB358\uC8042/\uB358\uC804 2-1.unity"
+    guid: ae8a016de085d6849ab34e4bbc2329a3
+  - enabled: 1
+    path: "Assets/Scenes/\uB358\uC8042/\uB358\uC804 2-2.unity"
+    guid: 848fb4bc32b998c4fadd67738bde4c34
+  - enabled: 1
+    path: "Assets/Scenes/\uB358\uC8042/\uB358\uC804 2-3.unity"
+    guid: fc3a8eae7eb6a444190f848bc56343b3
   m_configObjects: {}
