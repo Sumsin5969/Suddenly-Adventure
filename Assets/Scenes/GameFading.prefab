@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3802387262872124035}
   - component: {fileID: 2590615397519782051}
   - component: {fileID: 7231691570252639553}
-  - component: {fileID: 4387156528601556809}
+  - component: {fileID: 8697871201419140396}
   m_Layer: 5
   m_Name: GameFading
   m_TagString: Untagged
@@ -103,7 +103,7 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
---- !u!114 &4387156528601556809
+--- !u!114 &8697871201419140396
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -112,11 +112,18 @@ MonoBehaviour:
   m_GameObject: {fileID: 4341196740765946990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c1d3c778b5f5997438e58fc5cf25cf07, type: 3}
+  m_Script: {fileID: 11500000, guid: c2cec75ba59704a40897a8905bdd405a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sceneName: 
-  fadeImage: {fileID: 2081744037968642605}
+  totalPoint: 0
+  stagePoint: 0
+  stageIndex: 0
+  health: 0
+  player: {fileID: 0}
+  UIhealth: []
+  UIPoint: {fileID: 0}
+  UIStage: {fileID: 0}
+  UIRestartBtn: {fileID: 0}
 --- !u!1 &6378434839128296581
 GameObject:
   m_ObjectHideFlags: 0

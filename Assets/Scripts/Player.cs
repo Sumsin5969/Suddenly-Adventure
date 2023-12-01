@@ -392,7 +392,6 @@ public class PlayerMove : MonoBehaviour
         {
             PlaySound("FINISH");
             LoadNextScene();
-            gameManager.NextStage();
         }
 
         else if (collision.gameObject.tag == "SavePoint")
@@ -400,6 +399,7 @@ public class PlayerMove : MonoBehaviour
             GameObject SavaPointObject = GameObject.FindGameObjectWithTag("SavePoint");
             SavePoint = SavaPointObject.transform;
             Debug.Log("세이브 성공");
+            collision.gameObject.SetActive(false);
         }
     }
     public void OnDamaged(Vector2 targetPos) // 피격시 설정
@@ -422,7 +422,7 @@ public class PlayerMove : MonoBehaviour
         PlaySound("DAMAGED"); // Sound
         Invoke("OffDamaged", 1); // Player 레이어로 돌아가는 시간(무적시간설정)
     }
-    private void OffDamaged() // 레이어를 Player로 변경
+    public void OffDamaged() // 레이어를 Player로 변경
     {
         gameObject.layer = 10;
         spriteRenderer.color = new Color(1, 1, 1, 1);
@@ -435,6 +435,7 @@ public class PlayerMove : MonoBehaviour
         capsuleCollider.enabled = false;
         rigid.AddForce(Vector2.up * 5, ForceMode2D.Impulse);
         PlaySound("DIE"); // Sound
+        Invoke("TimeStop", 1);
     }
 
     public void OnLive() // 플레이어 리스폰으로 살아날 때
@@ -479,7 +480,12 @@ public class PlayerMove : MonoBehaviour
         // 애니메이션
         anim.SetTrigger("doDamaged");
         PlaySound("DAMAGED"); // Sound
-        Invoke("OffDamaged", 1); // Player 레이어로 돌아가는 시간(무적시간설정)
+        Invoke("TimeStop", 1);
+    }
+
+    public void TimeStop()
+    {
+        Time.timeScale = 0;
     }
 
 }

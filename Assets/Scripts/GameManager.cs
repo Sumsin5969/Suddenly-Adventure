@@ -24,11 +24,6 @@ public class GameManager : MonoBehaviour
         {
             Instance = this;
         }
-        else
-        {
-            // 이미 인스턴스가 존재하면 현재 오브젝트를 파괴
-            Destroy(gameObject);
-        }
     }
     void Update() // 점수 업데이트
     {
@@ -101,6 +96,8 @@ public class GameManager : MonoBehaviour
         health = 0;
         // 모든 Health UI OFF
         UIhealth[0].color = new Color(1, 0, 0, 0.4f);
+        UIhealth[1].color = new Color(1, 0, 0, 0.4f);
+        UIhealth[2].color = new Color(1, 0, 0, 0.4f);
         // 플레이어 죽음
         player.OnDie();
 
@@ -131,6 +128,7 @@ public class GameManager : MonoBehaviour
         Transform playertransform = playerObject.transform;
         playertransform.position = player.SavePoint.position;
         player.OnLive();
+        player.OffDamaged();
         UIRestartBtn.SetActive(false); // Retry 버튼 비활성화
         // 모든 Health UI ON
         UIhealth[0].color = new Color(1, 1, 1, 1.0f);

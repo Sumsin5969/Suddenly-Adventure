@@ -7,7 +7,6 @@ public class PauseMenuKeeper : MonoBehaviour
 {
     void Start()
     {
-        DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
     }
 
