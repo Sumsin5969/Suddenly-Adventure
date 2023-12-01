@@ -3017,6 +3017,7 @@ MonoBehaviour:
   boxSize: {x: 1.5, y: 1.25, z: 0}
   SwordBeam: {fileID: 889994370596951765, guid: 211fd84ee2c820948bc2307d253987c0, type: 3}
   Player: {fileID: 145961667}
+  SavePoint: {fileID: 0}
 --- !u!70 &145961674
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -58475,11 +58476,11 @@ MonoBehaviour:
   - {fileID: 519350101}
   - {fileID: 775033420}
   UIhealth:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 118302242}
+  - {fileID: 1400710313}
+  - {fileID: 1613765235}
   UIPoint: {fileID: 0}
-  UIStage: {fileID: 0}
+  UIStage: {fileID: 1086495958}
   UIRestartBtn: {fileID: 0}
 --- !u!4 &1935589978
 Transform:
@@ -75057,7 +75058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 145961670}
   isFlip: 0
-  enemyhealth: 50
+  moveRange: 0
 --- !u!114 &2140734943
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -75077,6 +75078,7 @@ MonoBehaviour:
   attackMask:
     serializedVersion: 2
     m_Bits: 1024
+  audioBoss1Attack1: {fileID: 0}
 --- !u!114 &2140734944
 MonoBehaviour:
   m_ObjectHideFlags: 0
