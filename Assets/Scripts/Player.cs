@@ -374,7 +374,7 @@ public class PlayerMove : MonoBehaviour
             // Sound
             PlaySound("ITEM");
         }
-        else if (collision.gameObject.tag == "Finish")
+        /*else if (collision.gameObject.tag == "Finish")
         {
             // Next Stage
             gameManager.NextStage();
@@ -387,11 +387,12 @@ public class PlayerMove : MonoBehaviour
             gameManager.PrevStage();
             // Sound
             PlaySound("FINISH");
-        }
+        }*/
         else if (collision.gameObject.tag == "ScenePotal")
         {
             PlaySound("FINISH");
             LoadNextScene();
+            gameManager.NextStage();
         }
 
         else if (collision.gameObject.tag == "SavePoint")

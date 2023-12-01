@@ -12,7 +12,6 @@ public class GameManager : MonoBehaviour
     public int stageIndex;
     public int health;
     public PlayerMove player;
-    public GameObject[] Stages;
 
     public Image[] UIhealth;
     public Text UIPoint;
@@ -24,7 +23,6 @@ public class GameManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -40,7 +38,7 @@ public class GameManager : MonoBehaviour
             UIPoint.text = (totalPoint + stagePoint).ToString();
     }
 
-    public void PrevStage()
+    /*public void PrevStage()
     {
         if (stageIndex < Stages.Length)
         {
@@ -51,20 +49,17 @@ public class GameManager : MonoBehaviour
 
             UIStage.text = "STAGE " + (stageIndex + 1);
         }
-    }
+    }*/
     public void NextStage()
     {
         // 스테이지 바꾸기
-        if (stageIndex < Stages.Length - 1)
+        if (stageIndex < SceneManager.sceneCount)
         {
-            Stages[stageIndex].SetActive(false);
             stageIndex++;
-            Stages[stageIndex].SetActive(true);
-            PlayerReposition();
-
-            UIStage.text = "STAGE " + (stageIndex + 1);
+            string sceneName = SceneManager.GetSceneAt(stageIndex).name;
+            UIStage.text = sceneName;
         }
-        else
+        /*else
         { // 게임 클리어시
             // 플레이어 컨트롤 잠금
             Time.timeScale = 0;
@@ -78,7 +73,7 @@ public class GameManager : MonoBehaviour
         }
         // Calculate Point
         totalPoint += stagePoint;
-        stagePoint = 0;
+        stagePoint = 0;*/
     }
 
     public void HealthDown()
@@ -118,14 +113,8 @@ public class GameManager : MonoBehaviour
 
     public void PlayerReposition()
     {
-        player.transform.position = new Vector3(-6, 4, -1);
+        player.transform.position = player.SavePoint.position;
         player.VelocityZero();
-    }
-
-    public void Restart()
-    {
-        Time.timeScale = 1;
-        SceneManager.LoadScene(1);
     }
 
     public void RestartDungeon()
