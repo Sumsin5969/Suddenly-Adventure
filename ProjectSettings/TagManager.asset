@@ -18,6 +18,7 @@ TagManager:
   - Save
   - SavePoint
   - ClassicPoint
+  - Final_Boss
   layers:
   - Default
   - TransparentFX
