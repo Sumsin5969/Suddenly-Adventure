@@ -48,6 +48,7 @@ public class PlayerMove : MonoBehaviour
     public GameObject SwordBeam;
     public GameObject Player;
     public Transform SavePoint;
+    GameObject scanObject;
 
     void Awake()
     {
@@ -111,11 +112,13 @@ public class PlayerMove : MonoBehaviour
             anim.SetBool("isJumping", true);
             PlaySound("JUMP"); // Sound
         }
-
+        Debug.DrawRay(rigid.position, Vector2.zero, new Color(0, 1, 0));
+        RaycastHit2D scanRay = Physics2D.Raycast(rigid.position, Vector2.zero, 0.5f, LayerMask.GetMask("Npc"));
         if (rigid.velocity.y < 0) // 내려갈 때
         {
             // 레이캐스트 그리기
             Debug.DrawRay(rigid.position, Vector3.down, new Color(0, 1, 0));
+
 
             // 레이캐스트 히트, 레이어마스크 인식
             RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
@@ -319,6 +322,9 @@ public class PlayerMove : MonoBehaviour
         }
         isDash = false;
         
+        // 오브젝트 스캔
+        if (Input.GetKeyDown(KeyCode.X) && scanObject != null)
+            gameManager.Action(scanObject);
     }
 
     // 콤보 리셋

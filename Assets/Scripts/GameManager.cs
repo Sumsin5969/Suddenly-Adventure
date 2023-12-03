@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using TMPro;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +18,8 @@ public class GameManager : MonoBehaviour
     public Text UIPoint;
     public Text UIStage;
     public GameObject UIRestartBtn;
+    public TextMeshProUGUI talkText;
+    public GameObject scanObject;
 
     void Start()
     {
@@ -135,4 +138,11 @@ public class GameManager : MonoBehaviour
         UIhealth[1].color = new Color(1, 1, 1, 1.0f);
         UIhealth[2].color = new Color(1, 1, 1, 1.0f);
     }
+    // 오브젝트 상호작용
+    public void Action(GameObject scanObj)
+    {
+        scanObject = scanObj;
+        talkText.text = "이것의 이름은 " + scanObject.name + " 이라고 한다.";
+    }
+
 }
