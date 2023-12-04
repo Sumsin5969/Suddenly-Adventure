@@ -44,6 +44,7 @@ public class PlayerMove : MonoBehaviour
     public int comboCount = 0;
     public Transform pos;
     public Transform posJump;
+    public Transform interact;
     public Vector3 boxSize;
     public GameObject SwordBeam;
     public GameObject Player;
@@ -90,12 +91,12 @@ public class PlayerMove : MonoBehaviour
                 break;
         }
     }
-    
-    
+
+
     void Update()
     {
         isGround = Physics2D.OverlapCircle(posJump.position, checkRaidus, isLayer);
-        if(rigid.velocity.y > 0.0f)
+        if (rigid.velocity.y > 0.0f)
             anim.SetBool("isJumping", true);
         // 점프 (jumpCount 조절해서 2단 점프 가능)
         if (isGround == true && Input.GetKeyDown(KeyCode.Z) && jumpCnt > 0)
@@ -112,8 +113,7 @@ public class PlayerMove : MonoBehaviour
             anim.SetBool("isJumping", true);
             PlaySound("JUMP"); // Sound
         }
-        Debug.DrawRay(rigid.position, Vector2.zero, new Color(0, 1, 0));
-        RaycastHit2D scanRay = Physics2D.Raycast(rigid.position, Vector2.zero, 0.5f, LayerMask.GetMask("Npc"));
+
         if (rigid.velocity.y < 0) // 내려갈 때
         {
             // 레이캐스트 그리기
@@ -124,8 +124,10 @@ public class PlayerMove : MonoBehaviour
             RaycastHit2D rayHit = Physics2D.Raycast(rigid.position, Vector3.down, 1, LayerMask.GetMask("Platform"));
 
             // 착지
-            if(rayHit.collider != null){
-                if(rayHit.distance < 1.0f){
+            if (rayHit.collider != null)
+            {
+                if (rayHit.distance < 1.0f)
+                {
                     anim.SetBool("isJumping", false);
                     anim.SetBool("isFalling", false);
                     // Debug.Log(rayHit.collider.name);
@@ -136,14 +138,14 @@ public class PlayerMove : MonoBehaviour
         }
         else
             anim.SetBool("isFalling", false);
-      
+
         // 점프 횟수 카운트
         if (Input.GetKeyUp(KeyCode.Z))
         {
             jumpCnt--;
         }
         // 점프 횟수 초기화
-        if(isGround)
+        if (isGround)
         {
             jumpCnt = jumpCount;
             anim.SetBool("isJumping", false);
@@ -163,7 +165,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         float h = Input.GetAxis("Horizontal"); // 키보드 입력값
-        
+
         // 이동 상태 여부
         if (Mathf.Abs(h) > 0.1f)
         {
@@ -189,21 +191,21 @@ public class PlayerMove : MonoBehaviour
             if (Input.GetKey(KeyCode.X))
             {
                 // 땅에 있을 때 공격하면 멈춤
-                if(isGround == true)
+                if (isGround == true)
                 {
                     speed = 0;
                 }
-                
+
                 Collider2D[] collider2Ds = Physics2D.OverlapBoxAll(pos.position, boxSize, 0);
 
                 // 공격 범위 안에서 공격하면 디버그 로그 출력
                 foreach (Collider2D collider in collider2Ds)
                 {
-                    if(collider.tag == "Enemy")
+                    if (collider.tag == "Enemy")
                     {
                         collider.GetComponent<Enemy>().EnemyHit(1);
                     }
-                    else if(collider.tag == "Boss1")
+                    else if (collider.tag == "Boss1")
                     {
                         collider.GetComponent<Boss1_Health>().Boss1Hit(1);
                     }
@@ -271,7 +273,7 @@ public class PlayerMove : MonoBehaviour
         }
 
         // 공격 멈추면 다시 이동 가능
-        if(Input.GetKeyUp(KeyCode.X))
+        if (Input.GetKeyUp(KeyCode.X))
         {
             speed = 5;
         }
@@ -281,7 +283,7 @@ public class PlayerMove : MonoBehaviour
         //대쉬 쿨타임 돌면 시간초 고정
         if (dashFilltime >= dashCooltime)
         {
-            dashFilltime = dashCooltime;    
+            dashFilltime = dashCooltime;
         }
 
         // 대쉬
@@ -321,12 +323,29 @@ public class PlayerMove : MonoBehaviour
             maxSpeed = dashSpeed;
         }
         isDash = false;
-        
-        // 오브젝트 스캔
         if (Input.GetKeyDown(KeyCode.X) && scanObject != null)
-            gameManager.Action(scanObject);
+        {
+            Debug.Log(scanObject.name);
+        }
+        if (h <= 0)
+            dirVec = Vector2.left
+        else
+            dirvec = Vector2.right
     }
+    void FixedUpdate()
+    {
+        // 상호작용에 쓸 레이캐스트
+            Debug.DrawRay(rigid.position, transform.eulerAngles.y * 0.7, new Color(0, 1, 0));
+            RaycastHit2D scanRay = Physics2D.Raycast(rigid.position, Vector2.left, 0.7f, LayerMask.GetMask("Npc"));
 
+
+        if (scanRay.collider != null)
+        {
+            scanObject = scanRay.collider.gameObject;
+        }
+        else
+            scanObject = null;
+    }
     // 콤보 리셋
     void ResetCombo()
     {
@@ -340,12 +359,6 @@ public class PlayerMove : MonoBehaviour
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(pos.position, boxSize);
     }
-
-    void FixedUpdate()
-    {
-        
-    }
-
     private void OnCollisionEnter2D(Collision2D collision) // 피격
     {
         // 플레이어가 몬스터랑 접촉시
@@ -354,7 +367,7 @@ public class PlayerMove : MonoBehaviour
             OnDamaged(collision.transform.position);
         }
 
-        else if(collision.gameObject.tag == "Spike")
+        else if (collision.gameObject.tag == "Spike")
         {
             FullDamaged(collision.transform.position);
         }
@@ -368,11 +381,11 @@ public class PlayerMove : MonoBehaviour
             bool isBronze = collision.gameObject.name.Contains("Bronze");
             bool isSilver = collision.gameObject.name.Contains("Silver");
             bool isGold = collision.gameObject.name.Contains("Gold");
-            if(isBronze)
+            if (isBronze)
                 gameManager.stagePoint += 50;
-            else if(isSilver)
+            else if (isSilver)
                 gameManager.stagePoint += 100;
-            else if(isGold)
+            else if (isGold)
                 gameManager.stagePoint += 300;
             // Item 삭제
             collision.gameObject.SetActive(false);
