@@ -44,12 +44,12 @@ public class PlayerMove : MonoBehaviour
     public int comboCount = 0;
     public Transform pos;
     public Transform posJump;
-    public Transform interact;
     public Vector3 boxSize;
     public GameObject SwordBeam;
     public GameObject Player;
     public Transform SavePoint;
-    GameObject scanObject;
+    public Vector3 dirVec;
+    GameObject scanNpc;
 
     void Awake()
     {
@@ -323,28 +323,32 @@ public class PlayerMove : MonoBehaviour
             maxSpeed = dashSpeed;
         }
         isDash = false;
-        if (Input.GetKeyDown(KeyCode.X) && scanObject != null)
-        {
-            Debug.Log(scanObject.name);
-        }
-        if (h <= 0)
-            dirVec = Vector2.left
-        else
-            dirvec = Vector2.right
-    }
-    void FixedUpdate()
-    {
+
         // 상호작용에 쓸 레이캐스트
-            Debug.DrawRay(rigid.position, transform.eulerAngles.y * 0.7, new Color(0, 1, 0));
-            RaycastHit2D scanRay = Physics2D.Raycast(rigid.position, Vector2.left, 0.7f, LayerMask.GetMask("Npc"));
+            Debug.DrawRay(rigid.position, dirVec * 0.8f, new Color(0, 1, 0));
+            RaycastHit2D scanRay = Physics2D.Raycast(rigid.position, dirVec, 0.8f, LayerMask.GetMask("Npc"));
 
 
         if (scanRay.collider != null)
         {
-            scanObject = scanRay.collider.gameObject;
+            scanNpc = scanRay.collider.gameObject;
         }
         else
-            scanObject = null;
+            scanNpc = null;
+            
+        // x버튼 누르면 오브젝트 스캔
+        if (Input.GetKeyDown(KeyCode.X) && scanNpc != null)
+        {
+            gameManager.Action(scanNpc);
+        }
+        if (transform.eulerAngles.y > 0)
+            dirVec = Vector3.left;
+        else
+            dirVec = Vector3.right;
+    }
+    void FixedUpdate()
+    {
+        
     }
     // 콤보 리셋
     void ResetCombo()
