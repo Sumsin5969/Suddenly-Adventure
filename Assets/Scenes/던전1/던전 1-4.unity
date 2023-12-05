@@ -21898,8 +21898,8 @@ GameObject:
   - component: {fileID: 379838326}
   - component: {fileID: 379838325}
   - component: {fileID: 379838324}
-  - component: {fileID: 379838328}
   - component: {fileID: 379838327}
+  - component: {fileID: 379838328}
   m_Layer: 0
   m_Name: Phase2
   m_TagString: Untagged
@@ -22022,8 +22022,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &379838328
-BoxCollider2D:
+--- !u!60 &379838328
+PolygonCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -22054,7 +22054,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.5}
+  m_Offset: {x: 0, y: 0.25}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -22064,9 +22064,25 @@ BoxCollider2D:
     drawMode: 0
     adaptiveTiling: 0
   m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 15.5, y: 11.5}
-  m_EdgeRadius: 0
+  m_Points:
+    m_Paths:
+    - - {x: 1.125, y: -5.5}
+      - {x: 1.875, y: -3.75}
+      - {x: 3.875, y: -5.5}
+      - {x: 7.625, y: -5.5}
+      - {x: 7.625, y: 2.75}
+      - {x: 4.375, y: 5.5}
+      - {x: -1.375, y: 5.5}
+      - {x: -4.125, y: 4.25}
+      - {x: -5.375, y: 3.5}
+      - {x: -7.625, y: 0.5}
+      - {x: -7.625, y: -5.25}
+      - {x: -7.375, y: -5.5}
+      - {x: -5.875, y: -5.5}
+      - {x: -4.625, y: -3.75}
+      - {x: -2.625, y: -3.25}
+      - {x: -0.875, y: -5.5}
+  m_UseDelaunayMesh: 0
 --- !u!1 &418423722
 GameObject:
   m_ObjectHideFlags: 0
@@ -57125,6 +57141,7 @@ GameObject:
   - component: {fileID: 2066542750}
   - component: {fileID: 2066542751}
   - component: {fileID: 2066542752}
+  - component: {fileID: 2066542753}
   m_Layer: 15
   m_Name: Final_Boss
   m_TagString: Final_Boss
@@ -57348,6 +57365,19 @@ MonoBehaviour:
     m_Bits: 1024
   attackOffset2: {x: 8, y: 0.5, z: 0}
   attackRange2: 1.5
+--- !u!114 &2066542753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2066542739}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6f9f9ccaef1bce44b92c1a4dbd3d2ae7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemyhealth: 5
 --- !u!1 &2110665327
 GameObject:
   m_ObjectHideFlags: 0

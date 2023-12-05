@@ -209,6 +209,10 @@ public class PlayerMove : MonoBehaviour
                     {
                         collider.GetComponent<Boss1_Health>().Boss1Hit(1);
                     }
+                    else if (collider.tag == "Final_Boss")
+                    {
+                        collider.GetComponent<FinalBoss_Health>().FinalBossHit(1);
+                    }
                 }
 
                 curTime = coolTime;
