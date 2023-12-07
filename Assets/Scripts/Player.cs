@@ -8,6 +8,7 @@ using UnityEngine.SceneManagement;
 public class PlayerMove : MonoBehaviour
 {
     public GameManager gameManager;
+    public DialogueManager dialogue;
     public AudioClip audioJump;
     public AudioClip audioAttack;
     public AudioClip audioAttack2;
@@ -343,7 +344,7 @@ public class PlayerMove : MonoBehaviour
         // x버튼 누르면 오브젝트 스캔
         if (Input.GetKeyDown(KeyCode.X) && scanNpc != null)
         {
-            gameManager.Action(scanNpc);
+            dialogue.Action(scanNpc);
         }
         if (transform.eulerAngles.y > 0)
             dirVec = Vector3.left;

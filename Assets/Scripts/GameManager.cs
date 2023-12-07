@@ -18,10 +18,6 @@ public class GameManager : MonoBehaviour
     public Text UIPoint;
     public Text UIStage;
     public GameObject UIRestartBtn;
-    public TextMeshProUGUI talkText;
-    public GameObject scanObject;
-    public GameObject talkPanel;
-    public bool isAction;
     void Start()
     {
         if (Instance == null)
@@ -139,21 +135,6 @@ public class GameManager : MonoBehaviour
         UIhealth[0].color = new Color(1, 1, 1, 1.0f);
         UIhealth[1].color = new Color(1, 1, 1, 1.0f);
         UIhealth[2].color = new Color(1, 1, 1, 1.0f);
-    }
-    // 오브젝트 상호작용
-    public void Action(GameObject scanObj)
-    {
-        if (isAction)
-        {
-            isAction = false;
-        }
-        else
-        {
-            isAction = true;
-            scanObject = scanObj;
-            talkText.text = "이것의 이름은 " + scanObject.name + " 이라고 한다.";
-        }
-        talkPanel.SetActive(isAction);
     }
 
 }
