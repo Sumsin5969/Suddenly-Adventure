@@ -158,7 +158,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0, y: 798}
+  m_AnchoredPosition: {x: 0, y: 687}
   m_SizeDelta: {x: 900, y: 300}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &11107091
@@ -22970,7 +22970,7 @@ GameObject:
   m_Component:
   - component: {fileID: 979842868}
   - component: {fileID: 979842869}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: TX Village Props - Billboard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -36372,6 +36372,8 @@ MonoBehaviour:
   UIRestartBtn: {fileID: 576063750}
   talkText: {fileID: 480290440}
   scanObject: {fileID: 0}
+  talkPanel: {fileID: 2032814296}
+  isAction: 0
 --- !u!4 &2032814298
 Transform:
   m_ObjectHideFlags: 0

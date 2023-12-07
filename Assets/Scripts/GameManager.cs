@@ -152,8 +152,8 @@ public class GameManager : MonoBehaviour
             isAction = true;
             scanObject = scanObj;
             talkText.text = "이것의 이름은 " + scanObject.name + " 이라고 한다.";
-
         }
+        talkPanel.SetActive(isAction);
     }
 
 }

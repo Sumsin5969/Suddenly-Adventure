@@ -329,8 +329,8 @@ public class PlayerMove : MonoBehaviour
         isDash = false;
 
         // 상호작용에 쓸 레이캐스트
-            Debug.DrawRay(rigid.position, dirVec * 0.8f, new Color(0, 1, 0));
-            RaycastHit2D scanRay = Physics2D.Raycast(rigid.position, dirVec, 0.8f, LayerMask.GetMask("Npc"));
+        Debug.DrawRay(rigid.position, dirVec * 0.8f, new Color(0, 1, 0));
+        RaycastHit2D scanRay = Physics2D.Raycast(rigid.position, dirVec, 0.8f, LayerMask.GetMask("Npc"));
 
 
         if (scanRay.collider != null)
