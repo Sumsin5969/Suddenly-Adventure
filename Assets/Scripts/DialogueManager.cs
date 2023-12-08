@@ -6,11 +6,12 @@ using TMPro;
 
 public class DialogueManager : MonoBehaviour
 {
-    public TextMeshProUGUI talkText;
+    public TypeEffect talk;
     public GameObject scanObject;
     public GameObject talkPanel;
     public bool isAction;
     public int talkIndex;
+
     Dictionary<int, string[]> talkData;
 
     void Awake()
@@ -34,8 +35,8 @@ public class DialogueManager : MonoBehaviour
     }
     void GenertateData()
     {
-        talkData.Add(1000, new string[] { "왔구나, 김철수", "어디 갔다가 이제 오는게냐?" });
-        talkData.Add(2000, new string[] { "느낌이 좋지 않아..", "뭔가 큰일이 일어날 것 같은 기분이야"});
+        talkData.Add(1000, new string[] { "왔구나, 김철수", "어딜 갔다가 이제 오는게냐?" });
+        talkData.Add(2000, new string[] { "느낌이 좋지 않아..", "뭔가 큰일이 일어날 것 같은 기분이야" });
         talkData.Add(3000, new string[] { "대사를 입력해주세요." });
         talkData.Add(4000, new string[] { "대사를 입력해주세요." });
         talkData.Add(5000, new string[] { "대사를 입력해주세요." });
@@ -43,29 +44,37 @@ public class DialogueManager : MonoBehaviour
     }
     public string GetTalk(int id, int talkIndex)
     {
-        if(talkIndex == talkData[id].Length)
+        if (talkIndex == talkData[id].Length)
             return null;
         else
             return talkData[id][talkIndex];
     }
     void Talk(int id, bool isNpc)
     {
-        string talkData = GetTalk(id, talkIndex);
-
-        if(talkData == null)
+        string talkData = "";
+        if(talk.isAnim)
         {
-            isAction = false;
-            talkIndex = 0;
+            talk.SetMsg("");
             return;
-        }
-
-        if (isNpc)
-        {
-            talkText.text = talkData;
         }
         else
         {
-            talkText.text = talkData;
+            talkData = GetTalk(id, talkIndex);
+        }
+        if (talkData == null)
+            {
+                isAction = false;
+                talkIndex = 0;
+                return;
+            }
+
+        if (isNpc)
+        {
+            talk.SetMsg(talkData.Split(':')[0]);
+        }
+        else
+        {
+            talk.SetMsg(talkData);
         }
 
         isAction = true;

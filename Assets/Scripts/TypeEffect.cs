@@ -5,43 +5,60 @@ using UnityEngine.UI;
 using TMPro;
 public class TypeEffect : MonoBehaviour
 {
-    TextProMeshUGUI msgText;
+    TextMeshProUGUI msgText;
     public GameObject EndCursor;
     string targetMsg;
     public int CharPerSeconds;
     int index;
+    float interval;
+    AudioSource audioSource;
+    public bool isAnim;
     private void Awake()
     {
-        msgText = GetComponent<TextProMeshUGUI>();
+        msgText = GetComponent<TextMeshProUGUI>();
+        audioSource = GetComponent<AudioSource>();
     }
     public void SetMsg(string msg)
     {
-        targetMsg = msg;
-        EffectStart();
+        if (isAnim)
+        {
+            msgText.text = targetMsg;
+            CancelInvoke();
+            EffectEnd();
+        }
+        else
+        {
+            targetMsg = msg;
+            EffectStart();
+        }
     }
     void EffectStart()
     {
         msgText.text = "";
         index = 0;
         EndCursor.SetActive(false);
-        
-        Invoke("Effecting", 1 / CharPerSeconds);
+        interval = 1.0f / CharPerSeconds;
+        isAnim = true;
+        Invoke("Effecting", interval);
     }
     void Effecting()
     {
-        if(msgText.text == targetMsg)
+        if (msgText.text == targetMsg)
         {
             EffectEnd();
             return;
         }
 
         msgText.text += targetMsg[index];
-        index++;
 
-        Invoke("Effecting", 1 / CharPerSeconds);
+        if (targetMsg[index] != ' ' && targetMsg[index] != '.')
+            audioSource.Play();
+        index++;
+        Invoke("Effecting", interval);
     }
     void EffectEnd()
     {
+        isAnim = false;
         EndCursor.SetActive(true);
     }
 }
