@@ -26,7 +26,7 @@ TagManager:
   - 
   - Water
   - UI
-  - Npc
+  - Interact
   - Object
   - Platform
   - Enemy
@@ -37,7 +37,7 @@ TagManager:
   - Boss1_Death
   - Boss1
   - Spike
-  - Board
+  - 
   - 
   - 
   - 
