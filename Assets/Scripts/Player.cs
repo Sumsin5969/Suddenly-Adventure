@@ -50,7 +50,9 @@ public class PlayerMove : MonoBehaviour
     public GameObject Player;
     public Transform SavePoint;
     public Vector3 dirVec;
-    GameObject scanNpc;
+    GameObject scanObj;
+    private float dialogueDistance = 5.0f;
+    private float distanceToPlayer = 0.0f;
 
     void Awake()
     {
@@ -165,7 +167,7 @@ public class PlayerMove : MonoBehaviour
             }
         }
 
-        float h = Input.GetAxis("Horizontal"); // 키보드 입력값
+        float h = dialogue.isAction ? 0 : Input.GetAxis("Horizontal"); // 키보드 입력값
 
         // 이동 상태 여부
         if (Mathf.Abs(h) > 0.1f)
@@ -329,22 +331,30 @@ public class PlayerMove : MonoBehaviour
         }
         isDash = false;
 
-        // 상호작용에 쓸 레이캐스트
-        Debug.DrawRay(rigid.position, dirVec * 0.8f, new Color(0, 1, 0));
-        RaycastHit2D scanRay = Physics2D.Raycast(rigid.position, dirVec, 0.8f, LayerMask.GetMask("Npc"));
-
-
-        if (scanRay.collider != null)
+        if(scanObj != null)
         {
-            scanNpc = scanRay.collider.gameObject;
+            distanceToPlayer = Vector2.Distance(transform.position, scanObj.transform.position);
+        }
+        // 상호작용에 쓸 레이캐스트
+        Debug.DrawRay(rigid.position, dirVec * 1.0f, new Color(0, 1, 0));
+        RaycastHit2D scanRay = Physics2D.Raycast(rigid.position, dirVec, 1.0f, LayerMask.GetMask("Npc"));
+
+        if (scanRay.collider != null && Input.GetKeyDown(KeyCode.X))
+        {
+            scanObj = scanRay.collider.gameObject;
         }
         else
-            scanNpc = null;
+            scanObj = null;
             
-        // x버튼 누르면 오브젝트 스캔
-        if (Input.GetKeyDown(KeyCode.X) && scanNpc != null)
+        // x버튼 누르면 오브젝트 스캔        
+        if (Input.GetKeyDown(KeyCode.X) && scanObj != null)
         {
-            dialogue.Action(scanNpc);
+            dialogue.Action(scanObj);
+        }
+        if (distanceToPlayer >= dialogueDistance && scanObj != null)
+        {
+            dialogue.Action(scanObj);
+            scanObj = null;
         }
         if (transform.eulerAngles.y > 0)
             dirVec = Vector3.left;

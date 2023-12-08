@@ -19,9 +19,9 @@ public class DialogueManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
-    
+
     // 오브젝트 상호작용
     public void Action(GameObject scanObj)
     {
