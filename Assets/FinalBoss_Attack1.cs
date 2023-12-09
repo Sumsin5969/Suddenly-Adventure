@@ -13,9 +13,6 @@ public class FinalBoss_Attack1 : MonoBehaviour
     public Vector3 attackOffset2;
     public float attackRange2 = 1f;
 
-     public Vector3 attackOffset3;
-    public float attackRange3 = 1f;
-
     private void Awake()
     {
 
@@ -31,27 +28,18 @@ public class FinalBoss_Attack1 : MonoBehaviour
         pos2 += transform.right * attackOffset2.x;
         pos2 += transform.up * attackOffset2.y;
 
-        Vector3 pos3 = transform.position;
-        pos2 += transform.right * attackOffset3.x;
-        pos2 += transform.up * attackOffset3.y;
-
         Collider2D colInfo = Physics2D.OverlapCircle(pos, attackRange, attackMask);
         Collider2D colInfo2 = Physics2D.OverlapCircle(pos2, attackRange2, attackMask);
-        Collider2D colInfo3 = Physics2D.OverlapCircle(pos3, attackRange3, attackMask);
-
 
         // 공격 범위 내에서 내려찍는 타이밍에 피격 함수 실행
         if (gameObject.layer != 14 && colInfo != null)
         {
             colInfo.GetComponent<PlayerMove>().OnDamaged(colInfo.transform.position);
         }
-        else if (gameObject.layer != 14 && colInfo2 != null)
+
+        if (gameObject.layer != 14 && colInfo2 != null)
         {
             colInfo2.GetComponent<PlayerMove>().OnDamaged(colInfo2.transform.position);
-        }
-        else if (gameObject.layer != 14 && colInfo3 != null)
-        {
-            colInfo3.GetComponent<PlayerMove>().OnDamaged(colInfo3.transform.position);
         }
     }
 
@@ -72,13 +60,5 @@ public class FinalBoss_Attack1 : MonoBehaviour
 
         Gizmos.color = Color.red; // 원하는 색상으로 설정
         Gizmos.DrawWireSphere(pos2, attackRange2);
-
-        // Attack 함수에서 계산한 오버랩 써클의 범위를 Scene 뷰에 그립니다.
-        Vector3 pos3 = transform.position;
-        pos3 += transform.right * attackOffset3.x;
-        pos3 += transform.up * attackOffset3.y;
-
-        Gizmos.color = Color.red; // 원하는 색상으로 설정
-        Gizmos.DrawWireSphere(pos3, attackRange3);
     }
 }

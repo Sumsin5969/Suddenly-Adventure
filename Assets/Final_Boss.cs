@@ -10,6 +10,8 @@ public class Final_Boss : StateMachineBehaviour
     public float attackRange;
     public float attackRange2;
     public float moveRange;
+    public float banishRange;
+    public float banishAppearRange;
 
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
@@ -34,6 +36,21 @@ public class Final_Boss : StateMachineBehaviour
         {
             animator.SetTrigger("isAttack2");
         }
+
+        if (Vector2.Distance(player.position, rb.position) <= banishRange)
+        {
+            animator.SetBool("Banish", true);
+        }
+        if (Vector2.Distance(player.position, rb.position) >= banishAppearRange)
+        {
+            animator.SetBool("Banish", false);
+        }
+
+        if (animator.GetBool("Banish"))
+        {
+            animator.gameObject.layer = 17;
+        }
+
     }
 
     override public void OnStateExit(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)

@@ -21,22 +21,26 @@ public class FinalBoss_Health : MonoBehaviour
 
     public void FinalBossHit(int damage)
     {
-        enemyhealth -= damage;
-
-        if (enemyhealth <= 0) // 적 사망
+        if(!anim.GetBool("Banish"))
         {
-            anim.SetTrigger("Death");
-            gameObject.layer = 14;
+            enemyhealth -= damage;
 
-            BoxCollider2D collider = GetComponent<BoxCollider2D>();
-            collider.tag = "Boss1_Death";
+            if (enemyhealth <= 0) // 적 사망
+            {
+                anim.SetTrigger("Death");
+                gameObject.layer = 14;
+
+                BoxCollider2D collider = GetComponent<BoxCollider2D>();
+                collider.tag = "Boss1_Death";
+            }
+            else // 적 피격
+            {
+                // anim.SetTrigger("Damaged");
+                spriteRenderer.color = new Color(1, 1, 1, 0.4f);
+                Invoke("OffDamaged", 0.5f);
+            }
         }
-        else // 적 피격
-        {
-            // anim.SetTrigger("Damaged");
-            spriteRenderer.color = new Color(1, 1, 1, 0.4f);
-            Invoke("OffDamaged", 0.5f);
-        }
+        
 
         //if (enemyhealth <= 5)
         //{
