@@ -40,12 +40,7 @@ public class FinalBoss_Health : MonoBehaviour
                 Invoke("OffDamaged", 0.5f);
             }
         }
-        
 
-        //if (enemyhealth <= 5)
-        //{
-        //    anim.SetBool("isRage", true);
-        //}
     }
     public void OffDamaged()
     {
