@@ -55963,7 +55963,7 @@ GameObject:
   - component: {fileID: 657218189}
   - component: {fileID: 657218188}
   - component: {fileID: 657218187}
-  m_Layer: 9
+  m_Layer: 18
   m_Name: Skel
   m_TagString: Skel
   m_Icon: {fileID: 0}
@@ -56053,7 +56053,8 @@ MonoBehaviour:
   player: {fileID: 356149481}
   isFlip: 1
   moveRange: 6
-  enemyhealth: 5
+  enemyhealth: 10
+  invincibilityTime: 2
 --- !u!95 &657218190
 Animator:
   serializedVersion: 5
