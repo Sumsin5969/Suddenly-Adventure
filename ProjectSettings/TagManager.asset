@@ -19,6 +19,7 @@ TagManager:
   - SavePoint
   - ClassicPoint
   - Final_Boss
+  - Skel
   layers:
   - Default
   - TransparentFX

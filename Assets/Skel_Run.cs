@@ -25,13 +25,17 @@ public class Skel_Run : StateMachineBehaviour
     {
        if (Vector2.Distance(player.position, rb.position) <= moveRange)
        {
-            //anim.SetBool("isWalk", true);
+            anim.SetBool("isWalk", true);
             skel.LookPlayer();
             Vector2 target = new Vector2(player.position.x, rb.position.y);
             Vector2 newPos = Vector2.MoveTowards(rb.position, target, speed * Time.fixedDeltaTime);
             rb.MovePosition(newPos);
        }
-        
+       else
+        {
+            anim.SetBool("isWalk", false);
+        }
+
         if (Vector2.Distance(player.position, rb.position) <= attackRange)
         {
             animator.SetTrigger("isAttack");

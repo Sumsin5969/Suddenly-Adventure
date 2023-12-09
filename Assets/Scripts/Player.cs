@@ -208,6 +208,10 @@ public class PlayerMove : MonoBehaviour
                     {
                         collider.GetComponent<Enemy>().EnemyHit(1);
                     }
+                    else if (collider.tag == "Skel")
+                    {
+                        collider.GetComponent<Skel>().EnemyHit(1);
+                    }
                     else if (collider.tag == "Boss1")
                     {
                         collider.GetComponent<Boss1_Health>().Boss1Hit(1);
