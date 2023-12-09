@@ -48,9 +48,12 @@ public class Skel : MonoBehaviour
                 int add = transform.position.x - playerTransform.position.x > 0 ? 1 : -1;
                 rigid.AddForce(new Vector2(add, 0.5f) * 2, ForceMode2D.Impulse);
 
-                // 방어 애니메이션 재생 및 무적 상태 설정
-                StartCoroutine(DefendCooldown());
-            }
+                if (enemyhealth == 7 || enemyhealth == 4 || enemyhealth == 1)
+                {
+                    // 방어 애니메이션 재생 및 무적 상태 설정
+                    StartCoroutine(DefendCooldown());
+                }
+            }              
         }
     }
 
