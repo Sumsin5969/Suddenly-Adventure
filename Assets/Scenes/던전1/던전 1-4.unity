@@ -21604,6 +21604,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameManager: {fileID: 1301449538}
+  dialogue: {fileID: 0}
   audioJump: {fileID: 8300000, guid: 2c5292ba5cf254919a6b9e2b18e04f49, type: 3}
   audioAttack: {fileID: 8300000, guid: fe0b1f9aeb45b41b089175aeeabd5d95, type: 3}
   audioAttack2: {fileID: 8300000, guid: d46323e22e74e46baa241cbf48c85671, type: 3}
@@ -56459,10 +56460,6 @@ MonoBehaviour:
   UIPoint: {fileID: 0}
   UIStage: {fileID: 264207822}
   UIRestartBtn: {fileID: 1953998777}
-  talkText: {fileID: 0}
-  scanObject: {fileID: 0}
-  talkPanel: {fileID: 0}
-  isAction: 0
 --- !u!4 &1301449539
 Transform:
   m_ObjectHideFlags: 0
