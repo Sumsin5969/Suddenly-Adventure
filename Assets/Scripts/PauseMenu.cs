@@ -13,6 +13,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject optionCanvas;
     public GameObject BGM;
 
+
     void Start()
     {
         Instance = this;
@@ -83,5 +84,15 @@ public class PauseMenu : MonoBehaviour
     {
         Time.timeScale = 1f;
         SceneManager.LoadScene("StartScreen");
+    }
+
+    public void Save()
+    {
+        SaveAndLoad.Instance.SaveDataToJson();
+    }
+
+    public void Load()
+    {
+        SaveAndLoad.Instance.LoadData();
     }
 }

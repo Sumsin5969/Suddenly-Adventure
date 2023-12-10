@@ -30,6 +30,8 @@ public class PauseMenuButtons : MonoBehaviour
         buttons[2].gameObject.AddComponent<Button>().onClick.AddListener(OnApplyClick);
         buttons[3].gameObject.AddComponent<Button>().onClick.AddListener(OnBackClick);
         buttons[4].gameObject.AddComponent<Button>().onClick.AddListener(OnExitClick);
+        buttons[5].gameObject.AddComponent<Button>().onClick.AddListener(OnSaveClick);
+        buttons[6].gameObject.AddComponent<Button>().onClick.AddListener(OnLoadClick);
     }
     void OnMouseEnter(TextMeshProUGUI button)
     {
@@ -65,6 +67,17 @@ public class PauseMenuButtons : MonoBehaviour
     {
         PauseMenu.Instance.Exit();
         buttons[4].fontSize = 60;
+    }
+    void OnSaveClick()
+    {
+        PauseMenu.Instance.Save();
+        buttons[5].fontSize = 60;
+    }
+
+    void OnLoadClick()
+    {
+        PauseMenu.Instance.Load();
+        buttons[6].fontSize = 60;
     }
     // Update is called once per frame
     void Update()
