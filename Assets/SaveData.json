@@ -1,7 +1,9 @@
 {
-    "playerHealth": 0,
+    "playerHealth": 2,
     "playerPosition": {
-        "instanceID": 29588
+        "x": -2.0150411128997804,
+        "y": 3.9470443725585939,
+        "z": -1.0
     },
-    "sceneNumber": 3
+    "sceneNumber": 6
 }

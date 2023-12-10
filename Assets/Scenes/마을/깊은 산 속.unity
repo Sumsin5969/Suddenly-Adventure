@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 27398675}
   - component: {fileID: 27398674}
   m_Layer: 0
-  m_Name: All Menu
+  m_Name: PROTECT MENU
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -183,10 +183,9 @@ Transform:
   m_LocalScale: {x: 5.0625, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1516428023}
   - {fileID: 1091511489}
+  - {fileID: 1516428023}
   - {fileID: 912172295}
-  - {fileID: 2057035904}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &35824356
@@ -4434,6 +4433,58 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 973134161}
   m_CullTransparentMesh: 1
+--- !u!1 &989581047
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 989581049}
+  - component: {fileID: 989581048}
+  m_Layer: 0
+  m_Name: Save
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &989581048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989581047}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a09191de4b17dc24aab67af6c27cb3e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveData:
+    playerHealth: 0
+    playerPosition:
+      x: 0
+      y: 0
+      z: 0
+    sceneNumber: 0
+  gameManager: {fileID: 1935589977}
+--- !u!4 &989581049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 989581047}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.6473886, y: 6.151949, z: -1.6056695}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1002184111
 GameObject:
   m_ObjectHideFlags: 0
@@ -4909,7 +4960,6 @@ GameObject:
   - component: {fileID: 1091511486}
   - component: {fileID: 1091511490}
   - component: {fileID: 1091511491}
-  - component: {fileID: 1091511492}
   m_Layer: 5
   m_Name: PauseMenu
   m_TagString: Untagged
@@ -5037,22 +5087,6 @@ MonoBehaviour:
   - {fileID: 1325769259}
   - {fileID: 324307011}
   - {fileID: 311575103}
---- !u!114 &1091511492
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1091511485}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a09191de4b17dc24aab67af6c27cb3e8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  saveData:
-    playerHealth: 0
-    playerPosition: {fileID: 0}
-    sceneNumber: 0
 --- !u!1 &1115969487
 GameObject:
   m_ObjectHideFlags: 0
@@ -12041,6 +12075,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1935589978}
   - component: {fileID: 1935589977}
+  - component: {fileID: 1935589979}
   m_Layer: 0
   m_Name: Game_Manager
   m_TagString: Untagged
@@ -12065,6 +12100,13 @@ MonoBehaviour:
   stageIndex: 0
   health: 3
   player: {fileID: 145961673}
+  loadData:
+    playerHealth: 0
+    playerPosition:
+      x: 0
+      y: 0
+      z: 0
+    sceneNumber: 0
   UIhealth:
   - {fileID: 118302242}
   - {fileID: 1400710313}
@@ -12087,6 +12129,26 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1935589979
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1935589976}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a09191de4b17dc24aab67af6c27cb3e8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveData:
+    playerHealth: 0
+    playerPosition:
+      x: 0
+      y: 0
+      z: 0
+    sceneNumber: 0
+  gameManager: {fileID: 1935589977}
 --- !u!1 &1961081017
 GameObject:
   m_ObjectHideFlags: 0
@@ -12435,7 +12497,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1442991234}
-  m_Father: {fileID: 27398676}
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -12758,6 +12820,8 @@ SceneRoots:
   - {fileID: 705155224}
   - {fileID: 1230747617}
   - {fileID: 1674534620}
+  - {fileID: 2057035904}
   - {fileID: 1961081018}
   - {fileID: 1750196021}
   - {fileID: 27398676}
+  - {fileID: 989581049}

@@ -93,6 +93,6 @@ public class PauseMenu : MonoBehaviour
 
     public void Load()
     {
-        SaveAndLoad.Instance.LoadData();
+        GameManager.Instance.LoadSaveData();
     }
 }

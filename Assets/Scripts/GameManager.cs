@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using System.IO;
 
 public class GameManager : MonoBehaviour
 {
@@ -13,6 +14,7 @@ public class GameManager : MonoBehaviour
     public int stageIndex;
     public int health;
     public PlayerMove player;
+    public LoadData loadData;
 
     public Image[] UIhealth;
     public Text UIPoint;
@@ -137,4 +139,62 @@ public class GameManager : MonoBehaviour
         UIhealth[2].color = new Color(1, 1, 1, 1.0f);
     }
 
+    public void SavaDataFromJson()
+    {
+        string path = Path.Combine(Application.dataPath, "SaveData.json"); // 가져올 파일 경로
+        string jsonData = File.ReadAllText(path);
+        loadData = JsonUtility.FromJson<LoadData>(jsonData);
+
+    }
+    public void LoadSaveData()
+    {
+        SavaDataFromJson();
+        LoadAllData();
+    }
+
+    public void LoadAllData()
+    {
+        int nowsceneindex = SceneManager.GetActiveScene().buildIndex;
+        if (nowsceneindex == loadData.sceneNumber)
+        {
+            Debug.Log("Loaded Health: " + loadData.playerHealth);
+            Debug.Log("Loaded Position: " + loadData.playerPosition.x + ", " + loadData.playerPosition.y + ", " + loadData.playerPosition.z);
+
+            health = loadData.playerHealth;
+            if (health > 2)
+            {
+                UIhealth[0].color = new Color(1, 1, 1, 1.0f);
+                UIhealth[1].color = new Color(1, 1, 1, 1.0f);
+                UIhealth[2].color = new Color(1, 1, 1, 1.0f);
+            }
+            else if (health > 1)
+            {
+                UIhealth[0].color = new Color(1, 1, 1, 1.0f);
+                UIhealth[1].color = new Color(1, 1, 1, 1.0f);
+                UIhealth[2].color = new Color(1, 0, 0, 0.4f);
+            }
+            else if (health > 0)
+            {
+                UIhealth[0].color = new Color(1, 1, 1, 1.0f);
+                UIhealth[1].color = new Color(1, 0, 0, 0.4f);
+                UIhealth[2].color = new Color(1, 0, 0, 0.4f);
+            }
+            GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
+            Transform playertransform = playerObject.transform;
+            playertransform.position = loadData.playerPosition.ToVector3();
+        }
+        else
+        {
+            Debug.LogError("해당 맵에서는 할 수 없습니다!");
+        }
+    }
+
+}
+
+[System.Serializable]
+public class LoadData // 로드 데이터
+{
+    public int playerHealth; // 플레이어 체력
+    public SerializableVector3 playerPosition; // 플레이어 위치
+    public int sceneNumber; // 현재 씬
 }
