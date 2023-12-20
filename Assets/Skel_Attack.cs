@@ -21,7 +21,7 @@ public class Skel_Attack : MonoBehaviour
         // 공격 범위 내에서 휘두르는 타이밍에 피격 함수 실행
         if (gameObject.layer != 14 && colInfo != null)
         {
-            colInfo.GetComponent<PlayerMove>().OnDamaged(colInfo.transform.position);
+            colInfo.GetComponent<PlayerMove>().OnDamaged(colInfo.transform.position, 1);
         }
     }
 

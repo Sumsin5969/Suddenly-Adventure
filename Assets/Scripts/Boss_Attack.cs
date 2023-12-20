@@ -34,7 +34,7 @@ public class Boss_Attack : MonoBehaviour
         // 공격 범위 내에서 내려찍는 타이밍에 피격 함수 실행
         if (gameObject.layer != 14 && colInfo != null)
         {
-            colInfo.GetComponent<PlayerMove>().OnDamaged(colInfo.transform.position);
+            colInfo.GetComponent<PlayerMove>().OnDamaged(colInfo.transform.position, 1);
         }
     }
 

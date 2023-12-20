@@ -73,25 +73,39 @@ public class GameManager : MonoBehaviour
         stagePoint = 0;*/
     }
 
-    public void HealthDown()
+    public void HealthDown(int dmg)
     {
         if (health > 1)
         {
-            health--;
-            UIhealth[health].color = new Color(1, 0, 0, 0.4f);
-        }
-        else
-        {
-            // 모든 Health UI OFF
-            UIhealth[0].color = new Color(1, 0, 0, 0.4f);
-            // 플레이어 죽음
-            player.OnDie();
+            if (dmg >= 3)
+            {
+                UIhealth[0].color = new Color(1, 0, 0, 0.4f);
+                UIhealth[1].color = new Color(1, 0, 0, 0.4f);
+                UIhealth[2].color = new Color(1, 0, 0, 0.4f);
+            }
+            else if (dmg >= 2)
+            {
+                UIhealth[1].color = new Color(1, 0, 0, 0.4f);
+                UIhealth[2].color = new Color(1, 0, 0, 0.4f);
+            }
+            else
+            {
+                UIhealth[health].color = new Color(1, 0, 0, 0.4f);
+            }
+            health -= dmg;
+            
+            if (health <= 0)
+            {
+                // 플레이어 죽음
+                player.OnDie();
 
-            //  결과 UI
-            Debug.Log("죽었습니다!");
-            // Retry 버튼 UI
-            UIRestartBtn.SetActive(true);
+                //  결과 UI
+                Debug.Log("죽었습니다!");
+                // Retry 버튼 UI
+                UIRestartBtn.SetActive(true);
+            }
         }
+
     }
 
     public void AllHealthDown()

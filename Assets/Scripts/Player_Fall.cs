@@ -16,7 +16,7 @@ public class Player_Fall : MonoBehaviour
                 gameManager.PlayerReposition();
 
             // 떨어지면 체력감소
-            gameManager.HealthDown();
+            gameManager.HealthDown(1);
         }
     }
 }

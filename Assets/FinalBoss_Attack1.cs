@@ -34,12 +34,12 @@ public class FinalBoss_Attack1 : MonoBehaviour
         // 공격 범위 내에서 내려찍는 타이밍에 피격 함수 실행
         if (gameObject.layer != 14 && colInfo != null)
         {
-            colInfo.GetComponent<PlayerMove>().OnDamaged(colInfo.transform.position);
+            colInfo.GetComponent<PlayerMove>().OnDamaged(colInfo.transform.position, 1);
         }
 
         if (gameObject.layer != 14 && colInfo2 != null)
         {
-            colInfo2.GetComponent<PlayerMove>().OnDamaged(colInfo2.transform.position);
+            colInfo2.GetComponent<PlayerMove>().OnDamaged(colInfo2.transform.position, 1);
         }
     }
 

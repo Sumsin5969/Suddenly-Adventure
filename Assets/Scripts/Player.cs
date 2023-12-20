@@ -387,7 +387,7 @@ public class PlayerMove : MonoBehaviour
         // 플레이어가 몬스터랑 접촉시
         if (collision.gameObject.tag == "Enemy")
         {
-            OnDamaged(collision.transform.position);
+            OnDamaged(collision.transform.position, 1);
         }
 
         else if (collision.gameObject.tag == "Spike")
@@ -444,10 +444,10 @@ public class PlayerMove : MonoBehaviour
             collision.gameObject.SetActive(false);
         }
     }
-    public void OnDamaged(Vector2 targetPos) // 피격시 설정
+    public void OnDamaged(Vector2 targetPos, int dmg) // 피격시 설정
     {
         // 체력 감소
-        gameManager.HealthDown();
+        gameManager.HealthDown(dmg);
 
         // 레이어를 PlayDameged로 변경
         gameObject.layer = 11;
